@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class MilanaRestoranApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(MilanaRestoranApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(MilanaRestoranApplication.class, args);
+    }
 
 }
