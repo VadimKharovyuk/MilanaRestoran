@@ -5,6 +5,8 @@ import com.example.milanarestoran.repository.ReviewRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class ReviewService {
@@ -14,4 +16,8 @@ public class ReviewService {
        return reviewRepository.save(review);
 
     }
+
+   public List<Review> getAll(){
+        return reviewRepository.findAll();
+   }
 }

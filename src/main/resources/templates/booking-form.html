@@ -177,10 +177,10 @@
         }
         .parallax {
             /* The image used */
-            background-image: url('/order.paralsx.jpg'); /* Replace with your image URL */
+            background-image: url('/pic/Default_modern_bar_interior_0.jpg'); /* Replace with your image URL */
 
             /* Set a specific height */
-            height: 900px;
+            height: 700px;
 
             /* Create the parallax scrolling effect */
             background-attachment: fixed;
@@ -188,12 +188,6 @@
             background-repeat: no-repeat;
             background-size: cover;
         }
-        #map {
-            height: 400px;
-            width: 100%;
-            background-color: #ccc; /* Temporary background color */
-        }
-
 
         .footer {
             background-color: black;
@@ -215,6 +209,57 @@
         .footer a:hover {
             text-decoration: underline;
         }
+
+
+
+        .Reviews {
+            display: flex;
+            justify-content: space-between;
+            margin-left: 150px;
+            margin-right: 110px;
+            margin-bottom: 50px;
+        }
+        .review-section, .description-section {
+            width: 48%;
+            margin-top: 110px;
+        }
+        .review-section .form-group {
+            margin-bottom: 15px;
+        }
+        .review-section label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .review-section input, .review-section textarea {
+            width: 600px;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .review-section button {
+            padding: 10px 20px;
+            background-color: #9ea0cb;
+            color: #FFF;
+            border: none;
+            cursor: pointer;
+        }
+        .review-section button:hover {
+            background-color: #666;
+        }
+        .description-section h2 {
+            margin-bottom: 10px;
+            margin-top: 80px;
+        }
+        .description-section p {
+            line-height: 1.6;
+        }
+        .review-section textarea {
+            color: #666;
+        }
+
+
+
+
+
     </style>
 </head>
 <body>
@@ -272,9 +317,13 @@
     </div>
 </div>
 
-<div class="container">
 
-    <div class="container">
+<div class="Reviews">
+    <div class="description-section">
+        <h2>We would love  to hear from you</h2>
+        <p>We value your feedback and use it to improve our services. Your reviews help us understand what we're doing well and where we can improve. Thank you for taking the time to share your thoughts with us!</p>
+    </div>
+    <div class="review-section">
         <h1>Write a Review</h1>
         <form th:action="@{/bookings/reviews}" th:object="${review}" method="post">
             <div class="form-group">
@@ -298,39 +347,11 @@
             </div>
         </form>
     </div>
-
-
-<br><br>
-
+</div>
 
 <div class="parallax">
 </div>
 
-<footer>
-    <div id="map"></div>
-    <script>
-        // Функция инициализации карты
-        function initMap() {
-            // Координаты вашего барбер-шопа
-            var barberShop = {lat: 51.5074, lng: -0.1278}; // Например, координаты Лондона
-
-            // Создаем новую карту Google и центрируем ее на вашем местоположении
-            var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 15, // Масштаб карты
-                center: barberShop // Центр карты
-            });
-
-            // Создаем маркер вашего барбер-шопа на карте
-            var marker = new google.maps.Marker({
-                position: barberShop,
-                map: map,
-                title: 'Melina'
-            });
-        }
-    </script>
-    <!-- Загрузка Google Maps API с вашим ключом -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
-</footer>
 <div class="footer">
     <div class="address">
         <p>Vadim Kharovyuk Street 200</p>

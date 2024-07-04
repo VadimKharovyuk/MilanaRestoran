@@ -41,7 +41,6 @@ public class BookingController {
     @GetMapping("/new")
     public String createBookingForm(Model model) {
         List<User> users = userService.getAllUsers();
-
         // Помещаем список пользователей в модель
         model.addAttribute("users", users);
         model.addAttribute("booking", new Booking());
@@ -56,12 +55,11 @@ public class BookingController {
         // Проверка наличия ошибок валидации
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("error", "Пожалуйста, проверьте введенные данные.");
-            return "redirect:/bookings/new"; // Перенаправление на форму бронирования
+            return "redirect:/bookings/new";
         }
 
-        // Сохранение бронирования, если данные верные
         bookingService.save(booking);
-        return "booking-confirmation"; // Перенаправление на страницу подтверждения
+        return "booking-confirmation";
     }
 
     @PostMapping("/delete/{id}")
@@ -73,10 +71,16 @@ public class BookingController {
 
     @PostMapping("/reviews")
     public String saveReview(@ModelAttribute("review") Review review, RedirectAttributes redirectAttributes) {
-
         redirectAttributes.addFlashAttribute("param", "Thank you for your review. We appreciate your feedback!");
         reviewService.save(review);
         return "redirect:/bookings/new";
+    }
+
+    @GetMapping("/all-reviews")
+    public String reviewsList(Model model){
+        model.addAttribute("reviews",reviewService.getAll());
+        return "listreviews";
+
     }
 
 
