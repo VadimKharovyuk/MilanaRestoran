@@ -19,7 +19,7 @@ public class Booking {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "client_id")
     private User user;
 
     private LocalDate date;
