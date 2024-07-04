@@ -19,7 +19,7 @@ public class BookingService {
     public Booking findById(Long id){
         return bookingRepository.findById(id).orElseThrow();
     }
-    List<Booking> findAllBooking(Booking booking){
+    public List<Booking> findAllBooking(){
        return bookingRepository.findAll();
     }
     public void deleteById(Long id){
