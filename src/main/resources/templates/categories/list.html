@@ -1,5 +1,4 @@
 
-
 <!--<!DOCTYPE html>-->
 <!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
 <!--<head>-->
@@ -11,17 +10,19 @@
 <!--            font-family: Arial, sans-serif;-->
 <!--            margin: 0;-->
 <!--            padding: 0;-->
-<!--            background-color: #f7f7f7;-->
+<!--            background-color: #000;-->
+<!--            color: #fff;-->
 <!--        }-->
 <!--        .container {-->
 <!--            width: 80%;-->
 <!--            margin: 0 auto;-->
 <!--            padding: 20px 0;-->
 <!--            text-align: center;-->
+
 <!--        }-->
 <!--        .card {-->
-<!--            background-color: #f1f1f1;-->
-<!--            border: 1px solid #ddd;-->
+<!--            background-color: #222;-->
+<!--            border: 1px solid #333;-->
 <!--            border-radius: 5px;-->
 <!--            padding: 20px;-->
 <!--            margin: 10px;-->
@@ -29,11 +30,11 @@
 <!--            height: 150px;-->
 <!--            display: inline-block;-->
 <!--            transition: transform 0.3s;-->
-<!--            text-align: left; /* Ліве вирівнювання тексту в картці */-->
+<!--            text-align: left;-->
 <!--        }-->
 <!--        .card:hover {-->
 <!--            transform: scale(1.05);-->
-<!--            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);-->
+<!--            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);-->
 <!--        }-->
 <!--        .card h2 {-->
 <!--            font-size: 1.2rem;-->
@@ -41,15 +42,51 @@
 <!--        }-->
 <!--        .card p {-->
 <!--            font-size: 0.9rem;-->
-<!--            color: #666;-->
+<!--            color: #ccc;-->
 <!--        }-->
 <!--        .card a {-->
 <!--            text-decoration: none;-->
-<!--            color: inherit;-->
+<!--            color: #fff;-->
+<!--        }-->
+
+<!--        .header {-->
+<!--            background-color: black;-->
+<!--            color: white;-->
+<!--            padding: 30px 0px;-->
+<!--            display: flex;-->
+<!--            justify-content: space-between;-->
+<!--            align-items: center;-->
+<!--            position: fixed;-->
+<!--            width: 100%;-->
+<!--            top: 0px;-->
+<!--            z-index: 1;-->
+<!--        }-->
+<!--        .header a {-->
+<!--            color: white;-->
+<!--            margin: 0 15px;-->
+<!--            text-decoration: none;-->
+<!--        }-->
+<!--        .header a:hover {-->
+<!--            text-decoration: none;-->
+<!--        }-->
+<!--        .logo{-->
+<!--            padding-left: 50px;-->
 <!--        }-->
 <!--    </style>-->
 <!--</head>-->
 <!--<body>-->
+<!--<div class="header">-->
+<!--    <div class="logo">Melina</div>-->
+<!--    <nav>-->
+<!--        <a href="#about">About</a>-->
+<!--        <a href="/categories">Menu</a>-->
+<!--        <a href="#order-online">Order Online</a>-->
+<!--        <a href="#book-table">Book a Table</a>-->
+<!--        <a href="#contact">Contact</a>-->
+<!--        <a href="#login">Log In</a>-->
+<!--        <a href="#cart">Cart</a>-->
+<!--    </nav>-->
+<!--</div>-->
 <!--<div class="container">-->
 <!--    <h1>Categories</h1>-->
 <!--    <div class="card-container">-->
@@ -84,7 +121,11 @@
             margin: 0 auto;
             padding: 20px 0;
             text-align: center;
-
+        }
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
         }
         .card {
             background-color: #222;
@@ -93,8 +134,10 @@
             padding: 20px;
             margin: 10px;
             width: 200px;
-            height: 150px;
-            display: inline-block;
+            height: 250px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
             transition: transform 0.3s;
             text-align: left;
         }
@@ -114,7 +157,6 @@
             text-decoration: none;
             color: #fff;
         }
-
         .header {
             background-color: black;
             color: white;
@@ -135,7 +177,7 @@
         .header a:hover {
             text-decoration: none;
         }
-        .logo{
+        .logo {
             padding-left: 50px;
         }
     </style>
