@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dish Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .dish-details {
+            margin-bottom: 20px;
+        }
+        .dish-details h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        .dish-details p {
+            font-size: 1rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="dish-details">
+        <h2 th:text="${dish.name}"></h2>
+        <p th:text="${'Description: ' + dish.description}"></p>
+        <p th:text="${'Price: $' + dish.price}"></p>
+    </div>
+    <a href="/categories">Back to Categories</a>
+</div>
+</body>
+</html>

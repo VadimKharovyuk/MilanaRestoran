@@ -27,7 +27,7 @@
             text-decoration: none;
         }
         .header a:hover {
-            text-decoration: underline;
+            text-decoration: none;
         }
         .content {
             display: flex;
@@ -40,13 +40,14 @@
             background-position: center;
             color: white;
             text-align: center;
-            padding-top: 70px; /* Adjusted to move content below the fixed header */
+            padding-top: 70px;
         }
         .welcome-box {
             background-color: rgba(0, 0, 0, 0.5);
             padding: 20px;
             max-width: 400px;
             margin-bottom: 300px;
+            border-radius: 20px;
         }
         .welcome-box h1 {
             margin-top: 0;
@@ -56,6 +57,7 @@
             padding: 20px;
             max-width: 300px;
             margin-left: 480px; /* Left margin of 20px */
+            border-radius: 20px;
         }
         .footer {
             background-color: black;
@@ -87,7 +89,7 @@
     <div class="logo">Melina</div>
     <nav>
         <a href="#about">About</a>
-        <a href="#menu">Menu</a>
+        <a href="/categories">Menu</a>
         <a href="#order-online">Order Online</a>
         <a href="#book-table">Book a Table</a>
         <a href="#contact">Contact</a>
@@ -100,7 +102,7 @@
         <h1>Welcome</h1>
         <p>Ласкаво просимо до нашого чудового простору! Ми раді вас вітати тут. Поглиблюйтеся і досліджуйте все, що ми маємо пропонувати. Наша історія, наша пристрасть і наші послуги - все створено з урахуванням вас. Насолоджуйтеся вашим візитом і дайте нам знати, як ми можемо зробити його ще більш особливим для вас!</p>
 
-        <button onclick="location.href='#order-online'" style="background: none; color: white; border: 1px solid white; padding: 10px; cursor: pointer;">Order Online</button>
+        <button onclick="location.href='#order-online'" style="background: none; color: white; border: 1px solid white; padding: 10px; cursor: pointer ; " >Order Online</button>
     </div>
     <aside class="aside-box">
         <p>This is an aside element. You can use this space for additional information or links.</p>
@@ -108,8 +110,8 @@
 </div>
 <div class="footer">
     <div class="address">
-        <p>500 Terry Francine Street</p>
-        <p>San Francisco, CA 94158</p>
+        <p>Vadim Kharovyuk Street 200</p>
+        <p>Ukraine Kharkov, CA 94158</p>
     </div>
     <div class="social">
         <p>Follow Us</p>

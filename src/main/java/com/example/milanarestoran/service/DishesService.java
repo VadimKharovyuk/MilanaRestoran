@@ -14,20 +14,24 @@ public class DishesService {
     private final DishRepository dishRepository;
 
 
+    public List<Dish> getAllDishes() {
+       return dishRepository.findAll();
 
-
-    public Dish saveCategory(Dish dish){
-        return dishRepository.save(dish);
     }
 
+    public Dish getDishById(Long id) {
+       return dishRepository.findById(id).orElseThrow();
+    }
 
-    public Dish findById(Long id){
-        return dishRepository.findById(id).orElseThrow();
+    public Dish saveDish(Dish dish) {
+       return dishRepository.save(dish);
     }
-    List<Dish> findAllBooking(){
-        return dishRepository.findAll();
-    }
-    public void deleteById(Long id){
+
+    public void deleteDish(Long id) {
         dishRepository.deleteById(id);
+    }
+
+    public List<Dish> getDishesByCategoryId(Long id) {
+        return dishRepository.findByCategoryId(id);
     }
 }

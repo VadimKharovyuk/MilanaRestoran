@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dishes</title>
+    <style>
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .card {
+            background-color: #f1f1f1;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 10px;
+            width: 200px;
+            height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        .card h2 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        .card p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Dishes</h1>
+    <div class="card-container">
+        <div th:each="dish : ${dishes}" class="card">
+            <h2 th:text="${dish.name}"></h2>
+            <p th:text="${dish.description}"></p>
+            <p th:text="${'Price: $' + dish.price}"></p>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

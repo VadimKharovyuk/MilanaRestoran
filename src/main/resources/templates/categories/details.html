@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Category Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f7f7f7;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+        .category-info {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .dishes-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        .dish-card {
+            width: 30%;
+            background-color: #f1f1f1;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 10px;
+            transition: transform 0.3s;
+            text-align: left;
+        }
+        .dish-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        .dish-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        .dish-card p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="category-info">
+        <h1 th:text="${category.name}"></h1>
+        <p th:text="${category.description}"></p>
+    </div>
+
+    <div class="dishes-list">
+        <div th:each="dish : ${dishes}" class="dish-card">
+            <h3 th:text="${dish.name}"></h3>
+            <p th:text="${'Description: ' + dish.description}"></p>
+            <p th:text="${'Price: $' + dish.price}"></p>
+        </div>
+    </div>
+
+    <a href="/categories">Back to Categories</a>
+</div>
+</body>
+</html>

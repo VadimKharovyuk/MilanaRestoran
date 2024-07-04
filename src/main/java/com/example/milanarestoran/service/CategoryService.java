@@ -20,13 +20,17 @@ public class CategoryService {
     }
 
 
-    public Category findById(Long id){
-        return categoryRepository.findById(id).orElseThrow();
-    }
-    List<Category> findAllBooking(){
-        return categoryRepository.findAll();
-    }
+
     public void deleteById(Long id){
         categoryRepository.deleteById(id);
+    }
+
+    public List<Category> getAllCategories() {
+       return categoryRepository.findAll();
+
+    }
+
+    public Category getCategoryById(Long id) {
+       return categoryRepository.findById(id).orElseThrow();
     }
 }

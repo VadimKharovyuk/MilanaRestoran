@@ -1,0 +1,181 @@
+<!--&lt;!&ndash;<!DOCTYPE html>&ndash;&gt;-->
+<!--&lt;!&ndash;<html lang="en" xmlns:th="http://www.thymeleaf.org">&ndash;&gt;-->
+<!--&lt;!&ndash;<head>&ndash;&gt;-->
+<!--&lt;!&ndash;    <meta charset="UTF-8">&ndash;&gt;-->
+<!--&lt;!&ndash;    <meta name="viewport" content="width=device-width, initial-scale=1.0">&ndash;&gt;-->
+<!--&lt;!&ndash;    <title>Categories</title>&ndash;&gt;-->
+<!--&lt;!&ndash;    <style>&ndash;&gt;-->
+<!--&lt;!&ndash;        body {&ndash;&gt;-->
+<!--&lt;!&ndash;            font-family: Arial, sans-serif;&ndash;&gt;-->
+<!--&lt;!&ndash;            margin: 0;&ndash;&gt;-->
+<!--&lt;!&ndash;            padding: 0;&ndash;&gt;-->
+<!--&lt;!&ndash;            background-color: #f7f7f7;&ndash;&gt;-->
+<!--&lt;!&ndash;        }&ndash;&gt;-->
+<!--&lt;!&ndash;        .container {&ndash;&gt;-->
+<!--&lt;!&ndash;            width: 80%;&ndash;&gt;-->
+<!--&lt;!&ndash;            margin: 0 auto;&ndash;&gt;-->
+<!--&lt;!&ndash;            padding: 20px 0;&ndash;&gt;-->
+<!--&lt;!&ndash;            text-align: center;&ndash;&gt;-->
+<!--&lt;!&ndash;        }&ndash;&gt;-->
+<!--&lt;!&ndash;        .card {&ndash;&gt;-->
+<!--&lt;!&ndash;            background-color: #f1f1f1;&ndash;&gt;-->
+<!--&lt;!&ndash;            border: 1px solid #ddd;&ndash;&gt;-->
+<!--&lt;!&ndash;            border-radius: 5px;&ndash;&gt;-->
+<!--&lt;!&ndash;            padding: 20px;&ndash;&gt;-->
+<!--&lt;!&ndash;            margin: 10px;&ndash;&gt;-->
+<!--&lt;!&ndash;            width: 200px;&ndash;&gt;-->
+<!--&lt;!&ndash;            height: 150px;&ndash;&gt;-->
+<!--&lt;!&ndash;            display: inline-block;&ndash;&gt;-->
+<!--&lt;!&ndash;            transition: transform 0.3s;&ndash;&gt;-->
+<!--&lt;!&ndash;            text-align: left; /* Ліве вирівнювання тексту в картці */&ndash;&gt;-->
+<!--&lt;!&ndash;        }&ndash;&gt;-->
+<!--&lt;!&ndash;        .card:hover {&ndash;&gt;-->
+<!--&lt;!&ndash;            transform: scale(1.05);&ndash;&gt;-->
+<!--&lt;!&ndash;            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);&ndash;&gt;-->
+<!--&lt;!&ndash;        }&ndash;&gt;-->
+<!--&lt;!&ndash;        .card h2 {&ndash;&gt;-->
+<!--&lt;!&ndash;            font-size: 1.2rem;&ndash;&gt;-->
+<!--&lt;!&ndash;            margin-bottom: 10px;&ndash;&gt;-->
+<!--&lt;!&ndash;        }&ndash;&gt;-->
+<!--&lt;!&ndash;        .card p {&ndash;&gt;-->
+<!--&lt;!&ndash;            font-size: 0.9rem;&ndash;&gt;-->
+<!--&lt;!&ndash;            color: #666;&ndash;&gt;-->
+<!--&lt;!&ndash;        }&ndash;&gt;-->
+<!--&lt;!&ndash;    </style>&ndash;&gt;-->
+<!--&lt;!&ndash;</head>&ndash;&gt;-->
+<!--&lt;!&ndash;<body>&ndash;&gt;-->
+<!--&lt;!&ndash;<div class="container">&ndash;&gt;-->
+<!--&lt;!&ndash;    <h1>Categories</h1>&ndash;&gt;-->
+<!--&lt;!&ndash;    <div class="card-container">&ndash;&gt;-->
+<!--&lt;!&ndash;        <div th:each="category : ${categories}" class="card">&ndash;&gt;-->
+<!--&lt;!&ndash;            <h2 th:text="${category.name}"></h2>&ndash;&gt;-->
+<!--&lt;!&ndash;            <p th:text="${category.description}"></p>&ndash;&gt;-->
+<!--&lt;!&ndash;            &lt;!&ndash; Додайте інші поля категорії, які потрібно відобразити &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--&lt;!&ndash;</body>&ndash;&gt;-->
+<!--&lt;!&ndash;</html>&ndash;&gt;-->
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Categories</title>-->
+<!--    <style>-->
+<!--        body {-->
+<!--            font-family: Arial, sans-serif;-->
+<!--            margin: 0;-->
+<!--            padding: 0;-->
+<!--            background-color: #f7f7f7;-->
+<!--        }-->
+<!--        .container {-->
+<!--            width: 80%;-->
+<!--            margin: 0 auto;-->
+<!--            padding: 20px 0;-->
+<!--            text-align: center;-->
+<!--        }-->
+<!--        .card {-->
+<!--            background-color: #f1f1f1;-->
+<!--            border: 1px solid #ddd;-->
+<!--            border-radius: 5px;-->
+<!--            padding: 20px;-->
+<!--            margin: 10px;-->
+<!--            width: 200px;-->
+<!--            height: 150px;-->
+<!--            display: inline-block;-->
+<!--            transition: transform 0.3s;-->
+<!--            text-align: left; /* Ліве вирівнювання тексту в картці */-->
+<!--        }-->
+<!--        .card:hover {-->
+<!--            transform: scale(1.05);-->
+<!--            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);-->
+<!--        }-->
+<!--        .card h2 {-->
+<!--            font-size: 1.2rem;-->
+<!--            margin-bottom: 10px;-->
+<!--        }-->
+<!--        .card p {-->
+<!--            font-size: 0.9rem;-->
+<!--            color: #666;-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="container">-->
+<!--    <h1>Categories</h1>-->
+<!--    <div class="card-container">-->
+<!--        <div th:each="category : ${categories}" class="card">-->
+<!--            <h2 th:text="${category.name}"></h2>-->
+<!--            <p th:text="${category.description}"></p>-->
+<!--            <a th:href="@{'/categories/' + ${category.id}}">View Dishes</a>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px 0;
+            text-align: center;
+        }
+        .card {
+            background-color: #f1f1f1;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 10px;
+            width: 200px;
+            height: 150px;
+            display: inline-block;
+            transition: transform 0.3s;
+            text-align: left; /* Ліве вирівнювання тексту в картці */
+        }
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        .card h2 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        .card p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        .card a {
+            text-decoration: none;
+            color: inherit;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Categories</h1>
+    <div class="card-container">
+        <div th:each="category : ${categories}" class="card">
+            <a th:href="@{'/categories/' + ${category.id}}">
+                <h2 th:text="${category.name}"></h2>
+                <p th:text="${category.description}"></p>
+            </a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
