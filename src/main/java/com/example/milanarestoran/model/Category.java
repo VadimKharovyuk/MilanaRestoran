@@ -21,4 +21,5 @@ public class Category {
     private String description;
     @OneToMany(mappedBy = "category", cascade = CascadeType.PERSIST)
     private List<Dish> dishes = new ArrayList<>();
+
 }
