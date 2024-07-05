@@ -84,6 +84,38 @@
             height: 100%;
             background-color: rgba(255, 255, 255, 0.1); /* Прозрачный фон для контента */
         }
+        form .btn {
+            background-color: #666; /* Цвет фона */
+            color: #fff; /* Цвет текста */
+            padding: 10px 20px; /* Внутренние отступы */
+            border: none; /* Убираем рамку */
+            border-radius: 4px; /* Скругленные углы */
+            cursor: pointer; /* Указатель мыши при наведении */
+            transition: background-color 0.3s; /* Плавный переход цвета */
+        }
+
+        form .btn:hover {
+            background-color: #4e4ed2; /* Цвет фона при наведении */
+        }
+
+
+        a.more-details-btn {
+            display: inline-block; /* Для стилизации как кнопка */
+            background-color: #666; /* Цвет фона */
+            color: #fff; /* Цвет текста */
+            padding: 10px 20px; /* Внутренние отступы */
+            border: none; /* Убираем рамку */
+            border-radius: 4px; /* Скругленные углы */
+            text-decoration: none; /* Убираем подчеркивание */
+            cursor: pointer; /* Указатель мыши при наведении */
+            transition: background-color 0.3s; /* Плавный переход цвета */
+        }
+
+        a.more-details-btn:hover {
+            background-color: #0056b3; /* Цвет фона при наведении */
+        }
+
+
     </style>
 </head>
 <body>
@@ -97,6 +129,8 @@
             <h2 th:text="${dish.name}"></h2>
             <p th:text="${dish.description}"></p>
             <p th:text="${'Price: $' + dish.price}"></p>
+            <a th:href="@{'/dishes/' + ${dish.id}}" class="more-details-btn">Подробнее</a> <br><br>
+
             <form th:action="@{/cart/add/{dishId}(dishId=${dish.id})}" method="post">
                 <button type="submit" class="btn btn-primary">Add to Cart</button>
             </form>
