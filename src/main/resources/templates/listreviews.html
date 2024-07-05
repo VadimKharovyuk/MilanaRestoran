@@ -8,6 +8,8 @@
             background-color: #333;
             color: #ccc;
             font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
         }
         .containerReviews {
             max-width: 900px;
@@ -15,8 +17,10 @@
             padding: 20px;
             border: 1px solid #444;
             border-radius: 5px;
-            background-color: #666;
+            background-color: rgba(102, 102, 102, 0.8); /* Добавлена прозрачность */
             margin-top: 200px;
+            position: relative;
+            z-index: 1;
         }
         .review {
             border-bottom: 1px solid #555;
@@ -45,7 +49,7 @@
             position: fixed;
             width: 100%;
             top: 25px;
-            z-index: 1;
+            z-index: 2;
         }
         .header a {
             color: white;
@@ -55,12 +59,25 @@
         .header a:hover {
             text-decoration: none;
         }
-        .logo{
+        .logo {
             padding-left: 50px;
+        }
+        .parallax {
+            height: 900px;
+            background-image: url('/pic/Default_revierjpg.jpg');
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 0;
         }
     </style>
 </head>
 <body>
+<div class="parallax"></div>
 <div class="header">
     <div class="logo">Melina</div>
     <nav>
@@ -78,7 +95,6 @@
     <h1>All Reviews</h1>
     <div th:each="review : ${reviews}" class="review">
         <h3 th:text="${review.firstName + ' ' + review.lastName}">Name</h3>
-<!--        <p><strong>Email:</strong> <span th:text="${review.email}">Email</span></p>-->
         <p th:text="${review.message}">Message</p>
     </div>
 </div>
