@@ -366,6 +366,9 @@
             <p th:text="${'Описание: ' + dish.description}"></p>
             <p th:text="${'Цена: $' + dish.price}"></p>
             <a th:href="@{'/dishes/' + ${dish.id}}">Подробнее</a>
+            <form th:action="@{/cart/add/{dishId}(dishId=${dish.id})}" method="post">
+                <button type="submit" class="btn btn-primary">Add to Cart</button>
+            </form>
         </div>
     </div>
 

@@ -1,45 +1,32 @@
 package com.example.milanarestoran.service;
 
 import com.example.milanarestoran.model.Cart;
-import com.example.milanarestoran.repository.CartRepository;
+import com.example.milanarestoran.model.Dish;
+import com.example.milanarestoran.repository.DishRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.math.BigDecimal;
 
 @Service
 @AllArgsConstructor
 public class CartService {
+    private final DishRepository dishRepository;
 
-    private final CartRepository cartRepository;
-
-
-
-    public List<Cart> getAllCarts() {
-        return cartRepository.findAll();
+    public void addDishToCart(Cart cart, Dish dish) {
+        cart.setTotalAmount(cart.getTotalAmount().add(BigDecimal.valueOf(dish.getPrice())));
+        cart.getDishes().add(dish);
     }
 
-    public Optional<Cart> getCartById(Long cartId) {
-        return cartRepository.findById(cartId);
+    public void removeDishFromCart(Cart cart, Dish dish) {
+        cart.setTotalAmount(cart.getTotalAmount().subtract(BigDecimal.valueOf(dish.getPrice())));
+        cart.getDishes().remove(dish);
     }
 
-    public Cart createCart(Cart cart) {
-        return cartRepository.save(cart);
+    public Dish getDishById(Long dishId) {
+        return dishRepository.findById(dishId)
+                .orElseThrow(() -> new RuntimeException("Dish not found"));
     }
 
-    public Cart updateCart(Long cartId, Cart cartDetails) {
-        Cart cart = cartRepository.findById(cartId)
-                .orElseThrow(() -> new RuntimeException("Cart not found with id " + cartId));
 
-        cart.setUser(cartDetails.getUser());
-        cart.setTotalAmount(cartDetails.getTotalAmount());
-
-        return cartRepository.save(cart);
-    }
-
-    public void deleteCart(Long cartId) {
-        cartRepository.deleteById(cartId);
-    }
 }

@@ -27,9 +27,6 @@ public class UserService {
         return userRepository.findById(userId);
     }
 
-    public User createUser(User user) {
-        return userRepository.save(user);
-    }
 
     public User updateUser(Long userId, User userDetails) {
         User user = userRepository.findById(userId)
@@ -51,4 +48,6 @@ public class UserService {
     public boolean usernameExists(String username) {
         return userRepository.findByUsername(username).isPresent();
     }
+
+
 }
