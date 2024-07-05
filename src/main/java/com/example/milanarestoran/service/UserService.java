@@ -19,6 +19,9 @@ public class UserService {
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
+    public User saveUser(User user){
+        return userRepository.save(user);
+    }
 
     public Optional<User> getUserById(Long userId) {
         return userRepository.findById(userId);
@@ -44,5 +47,8 @@ public class UserService {
     }
     public boolean existsByEmail(String email){
        return userRepository.existsByEmail(email);
+    }
+    public boolean usernameExists(String username) {
+        return userRepository.findByUsername(username).isPresent();
     }
 }

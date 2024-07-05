@@ -288,7 +288,7 @@
             right: -5px;
             bottom: -5px;
             border-radius: 10px;
-            background: linear-gradient(45deg, #f3ef09, rgb(24, 68, 178), #15f591);
+            background: linear-gradient(45deg, #f3ef09, rgb(26, 160, 208), #15f591);
             background-size: 400% 400%;
             opacity: 0;
             transition: opacity 0.3s, background-size 0.3s;
@@ -367,11 +367,13 @@
         <a href="#cart">Cart</a>
     </nav>
 </div>
+
 <div class="parallax">
     <div class="parallax-inner"></div>
 </div>
+
 <div class="container">
-    <h1>Categories</h1>
+    <h1>Menu</h1>
     <div class="card-container">
         <div th:each="category : ${categories}" class="card">
             <a th:href="@{'/categories/' + ${category.id}}">
