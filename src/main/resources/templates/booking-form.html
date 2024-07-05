@@ -250,7 +250,26 @@
         .review-section textarea {
             color: #666;
         }
+        .parallax1 {
+            height: 500px; /* Высота параллакса */
+            background-image: url('/pic/Default_modern_bar_interior_02.jpg'); /* Замените 'your-parallax-image.jpg' на путь к вашему изображению */
+            background-attachment: fixed; /* Фиксируем изображение во вьюпорте */
+            background-position: center; /* Центрируем изображение */
+            background-repeat: no-repeat; /* Отключаем повтор изображения */
+            background-size: cover; /* Масштабируем изображение по размеру контейнера */
+            position: relative; /* Устанавливаем позиционирование */
+            z-index: 0; /* Устанавливаем z-index, чтобы параллакс был под контентом */
+            overflow: hidden; /* Скрываем лишнее изображение */
+        }
 
+        .parallax-inner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.2); /* Прозрачный фон для контента */
+        }
 
 
 
@@ -271,6 +290,9 @@
     </nav>
 </div>
 <br><br><br><br><br><br>
+<div class="parallax1">
+    <div class="parallax-inner"></div>
+</div>
 <div class="container">
     <h1>Create Booking</h1>
     <form th:action="@{/bookings}" th:object="${booking}" method="post">

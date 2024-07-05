@@ -167,6 +167,7 @@
         <a href="#cart">Cart</a>
     </nav>
 </div>
+<!-- categories/category.html -->
 <div class="container">
     <div class="category-info">
         <h1 th:text="${category.name}"></h1>
@@ -174,14 +175,16 @@
     </div>
 
     <div class="dishes-list">
-        <div th:each="dish, iterStat : ${dishes}" class="dish-card">
+        <div th:each="dish : ${dishes}" class="dish-card">
             <h3 th:text="${dish.name}"></h3>
-            <p th:text="${'Description: ' + dish.description}"></p>
-            <p th:text="${'Price: $' + dish.price}"></p>
+            <p th:text="${'Описание: ' + dish.description}"></p>
+            <p th:text="${'Цена: $' + dish.price}"></p>
+            <a th:href="@{/dishes/{id}(id=${dish.id})}">Подробнее</a>
         </div>
     </div>
 
-    <a href="/categories">Back to Categories</a>
+    <a href="/categories">Назад к категориям</a>
 </div>
+
 </body>
 </html>

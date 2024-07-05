@@ -9,7 +9,9 @@
             font-family: Arial, sans-serif;
             background-color: #f7f7f7;
             padding: 20px;
+            margin: 0; /* Добавляем, чтобы убрать отступы */
         }
+
         .container {
             max-width: 800px;
             margin: 0 auto;
@@ -18,28 +20,77 @@
             border-radius: 5px;
             padding: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative; /* Добавляем позиционирование для корректного отображения параллакса */
+            z-index: 1; /* Устанавливаем z-index, чтобы контент был выше параллакса */
         }
+
         .dish-details {
             margin-bottom: 20px;
         }
-        .dish-details h2 {
-            font-size: 1.5rem;
+
+        .dish-details h1 {
+            font-size: 2rem; /* Увеличиваем размер заголовка */
             margin-bottom: 10px;
         }
+
         .dish-details p {
-            font-size: 1rem;
+            font-size: 1.2rem; /* Увеличиваем размер текста описания */
             color: #666;
         }
+
+        /* Стили для параллакса */
+        .parallax {
+            height: 400px; /* Высота параллакса */
+            background-image: url('/pic/Default_Lobster_Ravioli_0.jpg'); /* Замените 'your-parallax-image.jpg' на путь к вашему изображению */
+            background-attachment: fixed; /* Фиксируем изображение во вьюпорте */
+            background-position: center; /* Центрируем изображение */
+            background-repeat: no-repeat; /* Отключаем повтор изображения */
+            background-size: cover; /* Масштабируем изображение по размеру контейнера */
+            position: relative; /* Устанавливаем позиционирование */
+            z-index: 0; /* Устанавливаем z-index, чтобы параллакс был под контентом */
+            overflow: hidden; /* Скрываем лишнее изображение */
+        }
+
+        .parallax-inner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.1); /* Прозрачный фон для контента */
+        }
+
+        /* Стили для ссылки "Назад к категориям" */
+        a {
+            display: block;
+            margin-top: 20px; /* Добавляем отступ сверху */
+            text-decoration: none;
+            color: #007bff; /* Цвет ссылки */
+        }
+
+        a:hover {
+            text-decoration: underline; /* Подчеркиваем ссылку при наведении */
+        }
     </style>
+
+
 </head>
 <body>
+<div class="parallax">
+    <div class="parallax-inner"></div>
+</div>
+<!-- dishes/details.html -->
 <div class="container">
     <div class="dish-details">
-        <h2 th:text="${dish.name}"></h2>
-        <p th:text="${'Description: ' + dish.description}"></p>
-        <p th:text="${'Price: $' + dish.price}"></p>
+        <h1 th:text="${dish.name}"></h1>
+        <p th:text="${'Описание: ' + dish.description}"></p>
+        <p th:text="${'Цена: $' + dish.price}"></p>
     </div>
-    <a href="/categories">Back to Categories</a>
+
+    <a href="/categories">Назад к категориям</a>
 </div>
+<!-- Параллакс -->
+
+
 </body>
 </html>

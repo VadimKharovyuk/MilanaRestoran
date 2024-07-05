@@ -1,4 +1,107 @@
 
+<!--&lt;!&ndash;<!DOCTYPE html>&ndash;&gt;-->
+<!--&lt;!&ndash;<html lang="en" xmlns:th="http://www.thymeleaf.org">&ndash;&gt;-->
+<!--&lt;!&ndash;<head>&ndash;&gt;-->
+<!--&lt;!&ndash;    <meta charset="UTF-8">&ndash;&gt;-->
+<!--&lt;!&ndash;    <meta name="viewport" content="width=device-width, initial-scale=1.0">&ndash;&gt;-->
+<!--&lt;!&ndash;    <title>Categories</title>&ndash;&gt;-->
+<!--&lt;!&ndash;    <style>&ndash;&gt;-->
+<!--&lt;!&ndash;        body {&ndash;&gt;-->
+<!--&lt;!&ndash;            font-family: Arial, sans-serif;&ndash;&gt;-->
+<!--&lt;!&ndash;            margin: 0;&ndash;&gt;-->
+<!--&lt;!&ndash;            padding: 0;&ndash;&gt;-->
+<!--&lt;!&ndash;            background-color: #000;&ndash;&gt;-->
+<!--&lt;!&ndash;            color: #fff;&ndash;&gt;-->
+<!--&lt;!&ndash;        }&ndash;&gt;-->
+<!--&lt;!&ndash;        .container {&ndash;&gt;-->
+<!--&lt;!&ndash;            width: 80%;&ndash;&gt;-->
+<!--&lt;!&ndash;            margin: 0 auto;&ndash;&gt;-->
+<!--&lt;!&ndash;            padding: 20px 0;&ndash;&gt;-->
+<!--&lt;!&ndash;            text-align: center;&ndash;&gt;-->
+
+<!--&lt;!&ndash;        }&ndash;&gt;-->
+<!--&lt;!&ndash;        .card {&ndash;&gt;-->
+<!--&lt;!&ndash;            background-color: #222;&ndash;&gt;-->
+<!--&lt;!&ndash;            border: 1px solid #333;&ndash;&gt;-->
+<!--&lt;!&ndash;            border-radius: 5px;&ndash;&gt;-->
+<!--&lt;!&ndash;            padding: 20px;&ndash;&gt;-->
+<!--&lt;!&ndash;            margin: 10px;&ndash;&gt;-->
+<!--&lt;!&ndash;            width: 200px;&ndash;&gt;-->
+<!--&lt;!&ndash;            height: 150px;&ndash;&gt;-->
+<!--&lt;!&ndash;            display: inline-block;&ndash;&gt;-->
+<!--&lt;!&ndash;            transition: transform 0.3s;&ndash;&gt;-->
+<!--&lt;!&ndash;            text-align: left;&ndash;&gt;-->
+<!--&lt;!&ndash;        }&ndash;&gt;-->
+<!--&lt;!&ndash;        .card:hover {&ndash;&gt;-->
+<!--&lt;!&ndash;            transform: scale(1.05);&ndash;&gt;-->
+<!--&lt;!&ndash;            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);&ndash;&gt;-->
+<!--&lt;!&ndash;        }&ndash;&gt;-->
+<!--&lt;!&ndash;        .card h2 {&ndash;&gt;-->
+<!--&lt;!&ndash;            font-size: 1.2rem;&ndash;&gt;-->
+<!--&lt;!&ndash;            margin-bottom: 10px;&ndash;&gt;-->
+<!--&lt;!&ndash;        }&ndash;&gt;-->
+<!--&lt;!&ndash;        .card p {&ndash;&gt;-->
+<!--&lt;!&ndash;            font-size: 0.9rem;&ndash;&gt;-->
+<!--&lt;!&ndash;            color: #ccc;&ndash;&gt;-->
+<!--&lt;!&ndash;        }&ndash;&gt;-->
+<!--&lt;!&ndash;        .card a {&ndash;&gt;-->
+<!--&lt;!&ndash;            text-decoration: none;&ndash;&gt;-->
+<!--&lt;!&ndash;            color: #fff;&ndash;&gt;-->
+<!--&lt;!&ndash;        }&ndash;&gt;-->
+
+<!--&lt;!&ndash;        .header {&ndash;&gt;-->
+<!--&lt;!&ndash;            background-color: black;&ndash;&gt;-->
+<!--&lt;!&ndash;            color: white;&ndash;&gt;-->
+<!--&lt;!&ndash;            padding: 30px 0px;&ndash;&gt;-->
+<!--&lt;!&ndash;            display: flex;&ndash;&gt;-->
+<!--&lt;!&ndash;            justify-content: space-between;&ndash;&gt;-->
+<!--&lt;!&ndash;            align-items: center;&ndash;&gt;-->
+<!--&lt;!&ndash;            position: fixed;&ndash;&gt;-->
+<!--&lt;!&ndash;            width: 100%;&ndash;&gt;-->
+<!--&lt;!&ndash;            top: 0px;&ndash;&gt;-->
+<!--&lt;!&ndash;            z-index: 1;&ndash;&gt;-->
+<!--&lt;!&ndash;        }&ndash;&gt;-->
+<!--&lt;!&ndash;        .header a {&ndash;&gt;-->
+<!--&lt;!&ndash;            color: white;&ndash;&gt;-->
+<!--&lt;!&ndash;            margin: 0 15px;&ndash;&gt;-->
+<!--&lt;!&ndash;            text-decoration: none;&ndash;&gt;-->
+<!--&lt;!&ndash;        }&ndash;&gt;-->
+<!--&lt;!&ndash;        .header a:hover {&ndash;&gt;-->
+<!--&lt;!&ndash;            text-decoration: none;&ndash;&gt;-->
+<!--&lt;!&ndash;        }&ndash;&gt;-->
+<!--&lt;!&ndash;        .logo{&ndash;&gt;-->
+<!--&lt;!&ndash;            padding-left: 50px;&ndash;&gt;-->
+<!--&lt;!&ndash;        }&ndash;&gt;-->
+<!--&lt;!&ndash;    </style>&ndash;&gt;-->
+<!--&lt;!&ndash;</head>&ndash;&gt;-->
+<!--&lt;!&ndash;<body>&ndash;&gt;-->
+<!--&lt;!&ndash;<div class="header">&ndash;&gt;-->
+<!--&lt;!&ndash;    <div class="logo">Melina</div>&ndash;&gt;-->
+<!--&lt;!&ndash;    <nav>&ndash;&gt;-->
+<!--&lt;!&ndash;        <a href="#about">About</a>&ndash;&gt;-->
+<!--&lt;!&ndash;        <a href="/categories">Menu</a>&ndash;&gt;-->
+<!--&lt;!&ndash;        <a href="#order-online">Order Online</a>&ndash;&gt;-->
+<!--&lt;!&ndash;        <a href="#book-table">Book a Table</a>&ndash;&gt;-->
+<!--&lt;!&ndash;        <a href="#contact">Contact</a>&ndash;&gt;-->
+<!--&lt;!&ndash;        <a href="#login">Log In</a>&ndash;&gt;-->
+<!--&lt;!&ndash;        <a href="#cart">Cart</a>&ndash;&gt;-->
+<!--&lt;!&ndash;    </nav>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--&lt;!&ndash;<div class="container">&ndash;&gt;-->
+<!--&lt;!&ndash;    <h1>Categories</h1>&ndash;&gt;-->
+<!--&lt;!&ndash;    <div class="card-container">&ndash;&gt;-->
+<!--&lt;!&ndash;        <div th:each="category : ${categories}" class="card">&ndash;&gt;-->
+<!--&lt;!&ndash;            <a th:href="@{'/categories/' + ${category.id}}">&ndash;&gt;-->
+<!--&lt;!&ndash;                <h2 th:text="${category.name}"></h2>&ndash;&gt;-->
+<!--&lt;!&ndash;                <p th:text="${category.description}"></p>&ndash;&gt;-->
+<!--&lt;!&ndash;            </a>&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--&lt;!&ndash;</body>&ndash;&gt;-->
+<!--&lt;!&ndash;</html>&ndash;&gt;-->
+
+
 <!--<!DOCTYPE html>-->
 <!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
 <!--<head>-->
@@ -18,7 +121,13 @@
 <!--            margin: 0 auto;-->
 <!--            padding: 20px 0;-->
 <!--            text-align: center;-->
+<!--            margin-top: 110px;-->
 
+<!--        }-->
+<!--        .card-container {-->
+<!--            display: flex;-->
+<!--            flex-wrap: wrap;-->
+<!--            justify-content: center;-->
 <!--        }-->
 <!--        .card {-->
 <!--            background-color: #222;-->
@@ -27,8 +136,10 @@
 <!--            padding: 20px;-->
 <!--            margin: 10px;-->
 <!--            width: 200px;-->
-<!--            height: 150px;-->
-<!--            display: inline-block;-->
+<!--            height: 250px;-->
+<!--            display: flex;-->
+<!--            flex-direction: column;-->
+<!--            justify-content: space-between;-->
 <!--            transition: transform 0.3s;-->
 <!--            text-align: left;-->
 <!--        }-->
@@ -48,7 +159,6 @@
 <!--            text-decoration: none;-->
 <!--            color: #fff;-->
 <!--        }-->
-
 <!--        .header {-->
 <!--            background-color: black;-->
 <!--            color: white;-->
@@ -69,8 +179,28 @@
 <!--        .header a:hover {-->
 <!--            text-decoration: none;-->
 <!--        }-->
-<!--        .logo{-->
+<!--        .logo {-->
 <!--            padding-left: 50px;-->
+<!--        }-->
+<!--        .parallax {-->
+<!--            height: 600px; /* Высота параллакса */-->
+<!--            background-image: url('/pic/Default_Juicy_grilled_steak_served_with_mashed_potatoes_and_1.jpg'); /* Замените 'your-parallax-image.jpg' на путь к вашему изображению */-->
+<!--            background-attachment: fixed; /* Фиксируем изображение во вьюпорте */-->
+<!--            background-position: center; /* Центрируем изображение */-->
+<!--            background-repeat: no-repeat; /* Отключаем повтор изображения */-->
+<!--            background-size: cover; /* Масштабируем изображение по размеру контейнера */-->
+<!--            position: relative; /* Устанавливаем позиционирование */-->
+<!--            z-index: 0; /* Устанавливаем z-index, чтобы параллакс был под контентом */-->
+<!--            overflow: hidden; /* Скрываем лишнее изображение */-->
+<!--        }-->
+
+<!--        .parallax-inner {-->
+<!--            position: absolute;-->
+<!--            top: 0;-->
+<!--            left: 0;-->
+<!--            width: 100%;-->
+<!--            height: 100%;-->
+<!--            background-color: rgba(255, 255, 255, 0.5); /* Прозрачный фон для контента */-->
 <!--        }-->
 <!--    </style>-->
 <!--</head>-->
@@ -78,7 +208,7 @@
 <!--<div class="header">-->
 <!--    <div class="logo">Melina</div>-->
 <!--    <nav>-->
-<!--        <a href="#about">About</a>-->
+<!--        <a href="/">About</a>-->
 <!--        <a href="/categories">Menu</a>-->
 <!--        <a href="#order-online">Order Online</a>-->
 <!--        <a href="#book-table">Book a Table</a>-->
@@ -86,6 +216,9 @@
 <!--        <a href="#login">Log In</a>-->
 <!--        <a href="#cart">Cart</a>-->
 <!--    </nav>-->
+<!--</div>-->
+<!--<div class="parallax">-->
+<!--    <div class="parallax-inner"></div>-->
 <!--</div>-->
 <!--<div class="container">-->
 <!--    <h1>Categories</h1>-->
@@ -100,6 +233,7 @@
 <!--</div>-->
 <!--</body>-->
 <!--</html>-->
+
 
 
 <!DOCTYPE html>
@@ -122,7 +256,6 @@
             padding: 20px 0;
             text-align: center;
             margin-top: 110px;
-
         }
         .card-container {
             display: flex;
@@ -140,12 +273,30 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            transition: transform 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s;
             text-align: left;
         }
         .card:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+        .card:before {
+            content: "";
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border-radius: 10px;
+            background: linear-gradient(45deg, #f3ef09, rgb(24, 68, 178), #15f591);
+            background-size: 400% 400%;
+            opacity: 0;
+            transition: opacity 0.3s, background-size 0.3s;
+            z-index: -1;
+        }
+        .card:hover:before {
+            opacity: 1;
+            background-size: 200% 200%;
         }
         .card h2 {
             font-size: 1.2rem;
@@ -182,6 +333,25 @@
         .logo {
             padding-left: 50px;
         }
+        .parallax {
+            height: 600px;
+            background-image: url('/pic/Default_Juicy_grilled_steak_served_with_mashed_potatoes_and_1.jpg');
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .parallax-inner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
     </style>
 </head>
 <body>
@@ -196,6 +366,9 @@
         <a href="#login">Log In</a>
         <a href="#cart">Cart</a>
     </nav>
+</div>
+<div class="parallax">
+    <div class="parallax-inner"></div>
 </div>
 <div class="container">
     <h1>Categories</h1>
