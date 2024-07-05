@@ -50,7 +50,7 @@
 <div class="parallax">
     <div class="content">
         <div class="container my-5">
-            <h1>Cart</h1>
+            <h1>Корзина</h1>
             <table class="table table-striped">
                 <thead>
                 <tr>
@@ -67,6 +67,7 @@
                         <form th:action="@{/cart/remove/{dishId}(dishId=${item.id})}" method="post">
                             <button type="submit" class="btn btn-danger btn-sm">Remove</button>
                         </form>
+
                     </td>
                 </tr>
                 </tbody>

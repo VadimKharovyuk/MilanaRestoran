@@ -6,25 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dishes</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #070707;
+            color: #fff;
+        }
         .card-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
         }
         .card {
-            background-color: #f1f1f1;
-            border: 1px solid #ddd;
+            width: calc(20% - 20px);
+            background-color: #555;
+            border: 1px solid #666;
             border-radius: 5px;
             padding: 20px;
             margin: 10px;
-            width: 200px;
-            height: 200px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            transition: transform 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: left;
+            box-sizing: border-box;
+            position: relative;
+            z-index: 1;
         }
         .card:hover {
             transform: scale(1.05);
@@ -36,7 +41,7 @@
         }
         .card p {
             font-size: 0.9rem;
-            color: #666;
+            color: #f1e9e9;
         }
         .btn {
             padding: 10px 20px;
@@ -47,20 +52,46 @@
             transition: background-color 0.3s;
         }
         .btn-primary {
-            background-color: #007BFF;
+            background-color: #99a8d5;
             color: #fff;
         }
         .btn-primary:hover {
-            background-color: #0056b3;
+            background-color: #609bda;
         }
         .btn-primary:active {
             background-color: #003f7f;
         }
+
+
+        /* Стили для параллакса */
+        .parallax {
+            height: 400px; /* Высота параллакса */
+            background-image: url('/pic/Default_Pasta_Carbonara_0.jpg'); /* Замените 'your-parallax-image.jpg' на путь к вашему изображению */
+            background-attachment: fixed; /* Фиксируем изображение во вьюпорте */
+            background-position: center; /* Центрируем изображение */
+            background-repeat: no-repeat; /* Отключаем повтор изображения */
+            background-size: cover; /* Масштабируем изображение по размеру контейнера */
+            position: relative; /* Устанавливаем позиционирование */
+            z-index: 0; /* Устанавливаем z-index, чтобы параллакс был под контентом */
+            overflow: hidden; /* Скрываем лишнее изображение */
+        }
+
+        .parallax-inner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.1); /* Прозрачный фон для контента */
+        }
     </style>
 </head>
 <body>
+<div class="parallax">
+    <div class="parallax-inner"></div>
+</div>
 <div class="container">
-    <h1>Dishes</h1>
+    <h1 style="text-align: center">Dishes</h1>
     <div class="card-container">
         <div th:each="dish : ${dishes}" class="card">
             <h2 th:text="${dish.name}"></h2>

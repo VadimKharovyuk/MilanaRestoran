@@ -23,6 +23,7 @@ public class CartService {
         cart.getDishes().remove(dish);
     }
 
+
     public Dish getDishById(Long dishId) {
         return dishRepository.findById(dishId)
                 .orElseThrow(() -> new RuntimeException("Dish not found"));
