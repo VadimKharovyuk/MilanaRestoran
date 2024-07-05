@@ -9,6 +9,7 @@ import lombok.Setter;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @AllArgsConstructor
@@ -33,5 +34,6 @@ public class Cart {
          inverseJoinColumns = @JoinColumn(name = "dish_id")
  )
  private List<Dish> dishes = new ArrayList<>();
+
 
 }

@@ -335,6 +335,20 @@
             height: 100%;
             background-color: rgba(255, 255, 255, 0.1);
         }
+        form .btn {
+            background-color: #40d9e7; /* Цвет фона */
+            color: #fff; /* Цвет текста */
+            padding: 10px 20px; /* Внутренние отступы */
+            border: none; /* Убираем рамку */
+            border-radius: 4px; /* Скругленные углы */
+            cursor: pointer; /* Указатель мыши при наведении */
+            transition: background-color 0.3s; /* Плавный переход цвета */
+        }
+
+        form .btn:hover {
+            background-color: #4e4ed2; /* Цвет фона при наведении */
+        }
+
     </style>
 </head>
 <body>
@@ -366,7 +380,7 @@
             <h3 th:text="${dish.name}"></h3>
             <p th:text="${'Описание: ' + dish.description}"></p>
             <p th:text="${'Цена: $' + dish.price}"></p>
-            <a th:href="@{'/dishes/' + ${dish.id}}">Подробнее</a>
+            <a th:href="@{'/dishes/' + ${dish.id}}">Подробнее</a><br> <br>
             <form th:action="@{/cart/add/{dishId}(dishId=${dish.id})}" method="post">
                 <button type="submit" class="btn btn-primary">Add to Cart</button>
             </form>
