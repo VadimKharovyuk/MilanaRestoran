@@ -3,37 +3,83 @@
 <head>
     <title>Cart</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        .parallax {
+            background-image: url('/pic/Keatchen.jpg'); /* Замените на свой путь к изображению */
+            height: 100vh;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+        }
+        .parallax::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5); /* Прозрачный черный слой */
+        }
+        .content {
+            position: relative;
+            z-index: 1;
+        }
+        .container {
+            background-color: rgba(30, 30, 30, 0.85); /* Прозрачный фон */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            max-width: 800px;
+            margin: 0 auto;
+
+        }
+        .table th, .table td {
+            color: #ffffff;
+        }
+    </style>
 </head>
 <body>
-<div class="container my-5">
-    <h1>Cart</h1>
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>Dish</th>
-            <th>Price</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="item : ${cart.dishes}">
-            <td th:text="${item.name}"></td>
-            <td th:text="${#numbers.formatDecimal(item.price, 0, 2)}"></td>
-            <td>
-                <form th:action="@{/cart/remove/{dishId}(dishId=${item.id})}" method="post">
-                    <button type="submit" class="btn btn-danger btn-sm">Remove</button>
-                </form>
-            </td>
-        </tr>
-        </tbody>
-        <tfoot>
-        <tr>
-            <td colspan="2" class="text-right">Total:</td>
-            <td th:text="${#numbers.formatDecimal(cart.totalAmount, 0, 2)}"></td>
-        </tr>
-        </tfoot>
-    </table>
-    <a th:href="@{/dishes}" class="btn btn-primary">Continue Shopping</a>
+<div class="parallax">
+    <div class="content">
+        <div class="container my-5">
+            <h1>Cart</h1>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Dish</th>
+                    <th>Price</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="item : ${cart.dishes}">
+                    <td th:text="${item.name}"></td>
+                    <td th:text="${#numbers.formatDecimal(item.price, 0, 2)}"></td>
+                    <td>
+                        <form th:action="@{/cart/remove/{dishId}(dishId=${item.id})}" method="post">
+                            <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="2" class="text-right">Total:</td>
+                    <td th:text="${#numbers.formatDecimal(cart.totalAmount, 0, 2)}"></td>
+                </tr>
+                </tfoot>
+            </table>
+            <a th:href="@{/dishes}" class="btn btn-primary">Continue Shopping</a>
+        </div>
+    </div>
 </div>
 </body>
 </html>
