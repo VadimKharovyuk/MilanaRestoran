@@ -32,7 +32,7 @@ public class DishController {
     public String getDishById(@PathVariable Long id, Model model) {
         Dish dish = dishService.getDishById(id);
         model.addAttribute("dish", dish);
-        return "dishes/details"; // Ім'я шаблону Thymeleaf для відображення деталей блюда
+        return "dishes/details";
     }
 
     @PostMapping

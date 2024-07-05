@@ -65,7 +65,7 @@
 
         /* Стили для параллакса */
         .parallax {
-            height: 400px; /* Высота параллакса */
+            height: 600px; /* Высота параллакса */
             background-image: url('/pic/Default_Pasta_Carbonara_0.jpg'); /* Замените 'your-parallax-image.jpg' на путь к вашему изображению */
             background-attachment: fixed; /* Фиксируем изображение во вьюпорте */
             background-position: center; /* Центрируем изображение */
@@ -115,10 +115,51 @@
             background-color: #0056b3; /* Цвет фона при наведении */
         }
 
+        .header {
+            background-color: black;
+            color: white;
+            padding: 30px 0px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0px;
+            z-index: 1;
+
+        }
+        .header a {
+            color: white;
+            text-decoration: none;
+            margin-right: 50px;
+
+
+        }
+        .header a:hover {
+            text-decoration: none;
+        }
+        .logo {
+            padding-left: 50px;
+        }
+
+
 
     </style>
 </head>
 <body>
+<div class="header">
+    <div class="logo">Melina</div>
+    <nav>
+        <a href="/">About</a>
+        <a href="/categories">Menu</a>
+        <!--        <a href="#order-online">Order Online</a>-->
+        <a href="/bookings/new">Book a Table</a>
+        <a href="#contact">Contact</a>
+        <a href="/login">Log In</a>
+        <a href="/cart">Cart</a>
+        <a href="/bookings/all-reviews">Reviews</a>
+    </nav>
+</div>
 <div class="parallax">
     <div class="parallax-inner"></div>
 </div>

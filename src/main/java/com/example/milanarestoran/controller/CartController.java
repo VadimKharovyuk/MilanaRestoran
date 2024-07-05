@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class CartController {
     private static final Logger logger = LoggerFactory.getLogger(CartController.class);
     private final CartService cartService;
-    private final DishesService dishService;
+
 
     @GetMapping
     public String showCart(Model model,  HttpSession session) {
@@ -47,7 +47,7 @@ public String addDishToCart(@PathVariable Long dishId, HttpSession session) {
     cartService.addDishToCart(cart, dish);
     session.setAttribute("cart", cart);
 
-    return "redirect:/cart";
+    return "redirect:/dishes";
 }
 @PostMapping("/remove/{dishId}")
 public String removeDishFromCart(@PathVariable Long dishId, HttpSession session) {
@@ -60,8 +60,6 @@ public String removeDishFromCart(@PathVariable Long dishId, HttpSession session)
     }
     return "redirect:/cart";
 }
-
-
 
 
     @PostMapping("/clear")
