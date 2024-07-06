@@ -4,6 +4,7 @@ import com.example.milanarestoran.model.Category;
 import com.example.milanarestoran.model.Dish;
 import com.example.milanarestoran.repository.DishRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public class DishesService {
        return dishRepository.findAll();
 
     }
-
+    @Cacheable(value = "getDishById", key = "#id")
     public Dish getDishById(Long id) {
        return dishRepository.findById(id).orElseThrow();
     }

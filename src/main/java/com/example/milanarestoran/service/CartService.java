@@ -1,6 +1,7 @@
 package com.example.milanarestoran.service;
 import com.example.milanarestoran.model.Cart;
 import com.example.milanarestoran.model.Dish;
+import com.example.milanarestoran.repository.CartRepository;
 import com.example.milanarestoran.repository.DishRepository;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
@@ -15,6 +16,7 @@ public class CartService {
 
     private static final Logger logger = LoggerFactory.getLogger(CartService.class);
     private final DishRepository dishRepository;
+    private final CartRepository cartRepository;
 
 public void addDishToCart(Cart cart, Dish dish) {
     cart.setTotalAmount(cart.getTotalAmount().add(BigDecimal.valueOf(dish.getPrice())));
@@ -38,6 +40,8 @@ public void addDishToCart(Cart cart, Dish dish) {
     }
 
 
+    public void saveCartToDatabase(Cart cart) {
+    cartRepository.save(cart);
 
-
+    }
 }

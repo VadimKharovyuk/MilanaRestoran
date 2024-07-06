@@ -7,16 +7,17 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f7f7f7;
+            margin: 0;
             padding: 20px;
-            margin: 0; /* Добавляем, чтобы убрать отступы */
+            background-color: #070707;
+            color: #fff;
         }
 
         .container {
             max-width: 800px;
             margin: 0 auto;
-            background-color: #fff;
-            border: 1px solid #ddd;
+            background-color: #666;
+            border: 1px solid #ddd; /* Обводка */
             border-radius: 5px;
             padding: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -35,7 +36,7 @@
 
         .dish-details p {
             font-size: 1.2rem; /* Увеличиваем размер текста описания */
-            color: #666;
+            color: #d5cbcb;
         }
 
         /* Стили для параллакса */
@@ -71,11 +72,47 @@
         a:hover {
             text-decoration: underline; /* Подчеркиваем ссылку при наведении */
         }
+        .header {
+            background-color: black;
+            color: white;
+            padding: 30px 0px;
+            display: flex;
+            justify-content: right;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0px;
+            z-index: 1;
+        }
+        .header a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            margin-right: 50px;
+        }
+        .header a:hover {
+            text-decoration: none;
+        }
+
+
+
     </style>
 
 
 </head>
 <body>
+<div class="header">
+
+        <a href="/">About</a>
+        <a href="/categories">Menu</a>
+        <a href="#order-online">Order Online</a>
+        <a href="/bookings/new">Book a Table</a>
+        <a href="#contact">Contact</a>
+        <a href="/login">Log In</a>
+        <a href="/cart">Cart</a>
+        <a href="/bookings/all-reviews">Reviews</a>
+    </nav>
+</div>
 <div class="parallax">
     <div class="parallax-inner"></div>
 </div>

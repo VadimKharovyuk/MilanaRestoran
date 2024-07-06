@@ -3,6 +3,7 @@ package com.example.milanarestoran.service;
 import com.example.milanarestoran.model.Review;
 import com.example.milanarestoran.repository.ReviewRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
