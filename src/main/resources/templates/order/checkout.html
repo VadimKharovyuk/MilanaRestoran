@@ -78,7 +78,6 @@
     <div class="logo">Melina</div>
     <a href="/">Главная </a>
     <a href="/categories">Menu</a>
-    <!--        <a href="#order-online">Order Online</a>-->
     <a href="/bookings/new">Забронировать столик</a>
     <a href="/contact">Связь с нами </a>
     <a href="/login">Зарегистрироваться</a>
@@ -94,7 +93,6 @@
             <tr>
                 <th>Dish</th>
                 <th>Price</th>
-                <!--                <th>Actions</th>-->
             </tr>
             </thead>
             <tbody>
@@ -102,9 +100,6 @@
                 <td th:text="${item.name}"></td>
                 <td th:text="${#numbers.formatDecimal(item.price, 0, 2)}"></td>
                 <td>
-                    <!--                    <form th:action="@{/cart/remove/{dishId}(dishId=${item.id})}" method="post">-->
-                    <!--                        <button type="submit" class="btn btn-danger btn-sm">Remove</button>-->
-                    <!--                    </form>-->
                 </td>
             </tr>
             </tbody>

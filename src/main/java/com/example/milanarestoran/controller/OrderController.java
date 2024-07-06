@@ -1,14 +1,20 @@
 package com.example.milanarestoran.controller;
 
 import com.example.milanarestoran.model.Cart;
+import com.example.milanarestoran.model.Order;
 import com.example.milanarestoran.repository.OrderRepository;
 import com.example.milanarestoran.service.CartService;
+import com.example.milanarestoran.service.OrderService;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 
 @Controller
@@ -17,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class OrderController {
 
     private final CartService cartService;
-    private final OrderRepository orderRepository;
+    private final OrderService orderService;
 
 @GetMapping("/orderConfirmation")
 public String showOrderConfirmationPage() {
@@ -39,24 +45,17 @@ public String showOrderConfirmationPage() {
         model.addAttribute("deliveryAddress", ""); // Initialize with empty delivery address
         return "order/checkout";
     }
-
-//    @PostMapping("/checkout")
-//    public String processOrder(HttpSession session, @RequestParam("deliveryAddress") String deliveryAddress, @RequestParam("email") String email) {
-//        Cart cart = (Cart) session.getAttribute("cart");
-//        if (cart == null || cart.getDishes().isEmpty()) {
-//            // Redirect to some error page or handle empty cart scenario
-//            return "redirect:/";
-//        }
-//
-//        // Assuming you have logged in user details accessible in session or through security context
-//        // String userEmail = "example@example.com"; // Replace with actual logged in user email
-//
-//        cartService.checkoutCart(cart, deliveryAddress, email);
-//        session.setAttribute("cart", null); // Clear cart after checkout
-//
-//        // Redirect to the order confirmation page
-//        return "redirect:/orderConfirmation";
-//    }
+    @GetMapping("/allOrders")
+    public String showAllOrders(Model model) {
+        List<Order> orders = orderService.getAllOrders();
+        model.addAttribute("orders", orders);
+        return "order"; // Ваше представление для отображения всех заказов
+    }
+    @PostMapping("/deleteOrder")
+    public String deleteOrder(@RequestParam("id") Long orderId) {
+        orderService.deleteOrder(orderId);
+        return "redirect:/order/allOrders"; // Перенаправление на страницу всех заказов после удаления
+    }
 
 
 

@@ -1,0 +1,114 @@
+
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Orders</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #222;
+            color: #ddd;
+        }
+
+        .container {
+            margin-top: 20px;
+            background-color: #333;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        h2 {
+            color: #fff;
+        }
+
+        .table {
+            background-color: #444;
+            color: #ddd;
+        }
+
+        .table thead th {
+            background-color: #555;
+            color: #fff;
+        }
+
+        .table tbody tr {
+            background-color: #333;
+        }
+
+        .table tbody tr:nth-child(even) {
+            background-color: #444;
+        }
+
+        .table-sm {
+            background-color: #444;
+        }
+
+        .btn-danger {
+            background-color: #ff4444;
+            border-color: #ff4444;
+        }
+
+        .btn-danger:hover {
+            background-color: #ff2222;
+            border-color: #ff2222;
+        }
+
+        form {
+            display: inline;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>All Orders</h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Total Amount</th>
+            <th>Delivery Address</th>
+            <th>Order Date</th>
+            <th>Email</th>
+            <th>Order Items</th>
+            <th>Actions</th> <!-- Добавляем новую колонку для действий -->
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="order : ${orders}">
+            <td th:text="${order.id}"></td>
+            <td th:text="${#numbers.formatDecimal(order.totalAmount, 0, 2)}"></td>
+            <td th:text="${order.deliveryAddress}"></td>
+            <td th:text="${order.orderDate}"></td>
+            <td th:text="${order.email}"></td>
+            <td>
+                <table class="table table-sm">
+                    <thead>
+                    <tr>
+                        <th>Dish</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="item : ${order.orderItems}">
+                        <td th:text="${item.dish.name}"></td>
+                        <td th:text="${#numbers.formatDecimal(item.dish.price, 0, 2)}"></td>
+                        <td th:text="${item.quantity}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </td>
+            <td>
+                <form th:action="@{/order/deleteOrder(id=${order.id})}" method="post">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
