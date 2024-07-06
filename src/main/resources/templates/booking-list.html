@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>All Bookings</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #121212;
+            color: #ccc;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: black;
+            color: white;
+            padding: 30px 0px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0px;
+            z-index: 1;
+        }
+        .header a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+        .header a:hover {
+            text-decoration: none;
+        }
+        .logo {
+            padding-left: 50px;
+        }
+        .container {
+            width: 80%;
+            margin: 50px auto;
+            background-color: #1e1e1e;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+        h1 {
+            color: #28a745;
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #666;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #333;
+        }
+        tr:nth-child(even) {
+            background-color: #2e2e2e;
+        }
+        a {
+            color: #28a745;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .btn-delete {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .btn-delete:hover {
+            background-color: #c82333;
+        }
+        a {
+            color: #28a745;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <div class="logo">Melina</div>
+    <nav>
+        <a href="/static">About</a>
+        <a href="/categories">Menu</a>
+        <!--        <a href="#order-online">Order Online</a>-->
+        <a href="/bookings/new">Book a Table</a>
+        <a href="#contact">Contact</a>
+        <a href="/login">Log In</a>
+        <a href="/cart">Cart</a>
+        <a href="/bookings/all-reviews">Reviews</a>
+    </nav>
+</div>
+<div class="container">
+    <h1>All Bookings</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>User</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Number of Guests</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="booking : ${bookings}">
+            <td th:text="${booking.id}"></td>
+            <td th:text="${booking.user.username}"></td>
+            <td th:text="${booking.date}"></td>
+            <td th:text="${booking.time}"></td>
+            <td th:text="${booking.numberOfGuests}"></td>
+            <td>
+                <form th:action="@{/bookings/delete/{id}(id=${booking.id})}" method="post">
+                    <button type="submit" class="btn-delete">Delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
