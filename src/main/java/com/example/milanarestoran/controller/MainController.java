@@ -1,6 +1,7 @@
 package com.example.milanarestoran.controller;
 
 import com.example.milanarestoran.service.CategoryService;
+import com.example.milanarestoran.service.DishesService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,12 +15,16 @@ public class MainController {
 
 
     @GetMapping("/")
-    public String homePage(Model model){
-
-       model.addAttribute("categories", categoryService.getAllCategories());
-
+    public String homePage(Model model) {
+        model.addAttribute("categories", categoryService.getAllCategories());
         return "HomePage";
     }
+
+    @GetMapping("/contact")
+    public String contactPage(){
+        return "contact";
+    }
+
 
 
 }

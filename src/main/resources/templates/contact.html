@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Melina</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .content {
+            padding-top: 100px;
+            padding-bottom: 100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #f4f4f4;
+        }
+        .contact-section {
+            background-color: white;
+            padding: 20px;
+            max-width: 800px;
+            margin: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .contact-section h2 {
+            margin-top: 0;
+        }
+        .contact-section p {
+            line-height: 1.6;
+        }
+        .map-container {
+            width: 100%;
+            max-width: 800px;
+            height: 400px;
+            margin: 20px;
+        }
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            border-radius: 10px;
+        }
+        .form-section {
+            background-color: white;
+            padding: 20px;
+            max-width: 800px;
+            margin: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-section form {
+            display: flex;
+            flex-direction: column;
+        }
+        .form-section label {
+            margin: 10px 0 5px;
+        }
+        .form-section input, .form-section textarea {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .form-section button {
+            padding: 10px;
+            background-color: black;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        .form-section button:hover {
+            background-color: #333;
+        }
+        .header {
+            background-color: black;
+            color: white;
+            padding: 30px 0px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0px;
+            z-index: 1;
+        }
+        .header a {
+            color: white;
+            margin-right: 50px;
+            text-decoration: none;
+        }
+        .header a:hover {
+            text-decoration: none;
+        }
+        .logo {
+            padding-left: 50px;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <div class="logo">Melina</div>
+    <nav>
+        <a href="/">About</a>
+        <a href="/categories">Menu</a>
+        <!--        <a href="#order-online">Order Online</a>-->
+        <a href="/bookings/new">Book a Table</a>
+        <a href="#contact">Contact</a>
+        <a href="/login">Log In</a>
+        <a href="/cart">Cart</a>
+        <a href="/bookings/all-reviews">Reviews</a>
+    </nav>
+</div>
+<div class="content">
+    <div class="contact-section">
+        <h2>Contact Us</h2>
+        <p>Welcome to Melina! We're thrilled to have you here. For any inquiries or reservations, please reach out to us using the information below. We look forward to serving you and making your experience memorable.</p>
+        <h3>Restaurant Information</h3>
+        <p>
+            <strong>Address:</strong> Vadim Kharovyuk Street 403<br>
+            <strong>Phone:</strong> +123 456 7890<br>
+            <strong>Email:</strong> contact@melina.com
+        </p>
+        <h3>For Visitors</h3>
+        <p>At Melina, we strive to offer an exceptional dining experience. Whether you're joining us for a special occasion or a casual meal, we aim to make every visit special. Please let us know if there's anything we can do to enhance your time with us.</p>
+    </div>
+
+    <div class="form-section">
+        <h3>Join Our Team</h3>
+        <p>If you're passionate about food and hospitality, we'd love to hear from you. Fill out the form below to inquire about job opportunities at Melina.</p>
+        <form>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <div class="map-container">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509364!2d144.95373531531882!3d-37.81627977975179!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf5771e2f3c8b4e0d!2sFlinders+St+Station!5e0!3m2!1sen!2sau!4v1551234567890"></iframe>
+    </div>
+</div>
+</body>
+</html>

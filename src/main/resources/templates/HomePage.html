@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,30 +13,72 @@
         .header {
             background-color: black;
             color: white;
-            padding: 30px 0px;
+            padding: 30px 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: fixed;
             width: 100%;
-            top: 25px;
+            top: 0;
             z-index: 1;
         }
         .header a {
             color: white;
             margin: 0 15px;
             text-decoration: none;
+            position: relative;
         }
         .header a:hover {
             text-decoration: none;
         }
-
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            color: black;
+            min-width: 160px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropdown:hover .dropdown-category-content {
+            display: none;
+        }
+        .category-dropdown-content {
+            display: none;
+            position: absolute;
+            left: 160px;
+            top: 0;
+            background-color: white;
+            color: black;
+            min-width: 160px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        .dropdown-content .category:hover .category-dropdown-content {
+            display: block;
+        }
         .content {
             display: flex;
             align-items: center;
             justify-content: center;
             height: 100vh;
-            background-image: url('/0b340f_3996ca4661ef4803abd7db2f7e547718~mv2.jpg'); /* Replace with your image path */
+            background-image: url('/0b340f_3996ca4661ef4803abd7db2f7e547718~mv2.jpg');
             background-attachment: fixed;
             background-size: cover;
             background-position: center;
@@ -57,7 +100,7 @@
             background-color: rgba(0, 0, 0, 0.5);
             padding: 20px;
             max-width: 300px;
-            margin-left: 480px; /* Left margin of 20px */
+            margin-left: 480px;
             border-radius: 20px;
         }
         .footer {
@@ -68,7 +111,6 @@
             position: fixed;
             bottom: 0;
             width: 100%;
-
         }
         .footer .address, .footer .social {
             margin: 10px 0;
@@ -81,7 +123,7 @@
         .footer a:hover {
             text-decoration: underline;
         }
-        .logo{
+        .logo {
             padding-left: 50px;
         }
     </style>
@@ -91,10 +133,20 @@
     <div class="logo">Melina</div>
     <nav>
         <a href="/">About</a>
-        <a href="/categories">Menu</a>
+        <div class="dropdown">
+            <a href="/categories">Menu</a>
+            <div class="dropdown-content" th:if="${categories}">
+                <div class="category" th:each="category : ${categories}">
+                    <a th:href="@{/categories/{id}(id=${category.id})}" th:text="${category.name}"></a>
+                    <div class="category-dropdown-content" th:if="${category.dishes}">
+                        <a th:each="dish : ${category.dishes}" th:href="@{/dishes/{id}(id=${dish.id})}" th:text="${dish.name}"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
         <a href="/order/checkout">Order Online</a>
         <a href="/bookings/new">Book a Table</a>
-        <a href="#contact">Contact</a>
+        <a href="/contact">Contact</a>
         <a href="/login">Log In</a>
         <a href="/cart">Cart</a>
         <a href="/bookings/all-reviews">Reviews</a>
@@ -105,7 +157,7 @@
         <h1>Welcome</h1>
         <p>Ласкаво просимо до нашого чудового простору! Ми раді вас вітати тут. Поглиблюйтеся і досліджуйте все, що ми маємо пропонувати. Наша історія, наша пристрасть і наші послуги - все створено з урахуванням вас. Насолоджуйтеся вашим візитом і дайте нам знати, як ми можемо зробити його ще більш особливим для вас!</p>
 
-        <button onclick="location.href='/dishes'" style="background: none; color: white; border: 1px solid white; padding: 10px; cursor: pointer ; " >Order Now</button>
+        <button onclick="location.href='/dishes'" style="background: none; color: white; border: 1px solid white; padding: 10px; cursor: pointer;">Order Now</button>
     </div>
     <aside class="aside-box">
         <p>This is an aside element. You can use this space for additional information or links.</p>
@@ -114,10 +166,8 @@
 <div class="footer">
     <div class="address">
         <p>Vadim Kharovyuk Street 403</p>
-<!--        <p>Ukraine Kharkov, CA 94158</p>-->
     </div>
     <div class="social">
-<!--        <p>Follow Us</p>-->
         <a href="#">Twitter</a>
         <a href="#">Facebook</a>
         <a href="#">Instagram</a>
