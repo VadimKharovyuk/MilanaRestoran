@@ -78,6 +78,7 @@ package com.example.milanarestoran.controller;//package com.example.milanarestor
 
 import com.example.milanarestoran.model.Cart;
 import com.example.milanarestoran.model.Dish;
+import com.example.milanarestoran.model.Order;
 import com.example.milanarestoran.service.CartService;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
@@ -85,10 +86,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/cart")
@@ -96,7 +94,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class CartController {
     private static final Logger logger = LoggerFactory.getLogger(CartController.class);
     private final CartService cartService;
-    private final HttpSession httpSession; // Inject HttpSession
+    private final HttpSession httpSession;
 
     @GetMapping
     public String showCart(Model model) {
@@ -146,16 +144,22 @@ public class CartController {
         }
         return "redirect:/cart";
     }
+
     @PostMapping("/checkout")
-    public String checkoutCart() {
-        Cart cart = (Cart) httpSession.getAttribute("cart");
-        if (cart != null) {
-            // Save the cart and its contents to the database
-            cartService.saveCartToDatabase(cart);
-            // Clear the session cart after saving to avoid duplicates
-            httpSession.setAttribute("cart", null);
-            logger.debug("Saved and cleared the cart after checkout");
+    public String processOrder(HttpSession session, @RequestParam("deliveryAddress") String deliveryAddress, @RequestParam("email") String email) {
+        Cart cart = (Cart) session.getAttribute("cart");
+        if (cart == null || cart.getDishes().isEmpty()) {
+
+            return "redirect:/";
         }
-        return "redirect:/";
+
+        cartService.checkoutCart(cart, deliveryAddress, email);
+        session.setAttribute("cart", null); // Clear cart after checkout
+
+        // Redirect to the order confirmation page
+        return "redirect:/order/orderConfirmation";
     }
+
+
+
 }

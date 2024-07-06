@@ -29,16 +29,16 @@ public class OrderService {
         return orderRepository.save(order);
     }
 
-    public Order updateOrder(Long orderId, Order orderDetails) {
-        Order order = orderRepository.findById(orderId)
-                .orElseThrow(() -> new RuntimeException("Order not found with id " + orderId));
-
-        order.setUser(orderDetails.getUser());
-        order.setDate(orderDetails.getDate());
-        order.setTotalAmount(orderDetails.getTotalAmount());
-
-        return orderRepository.save(order);
-    }
+//    public Order updateOrder(Long orderId, Order orderDetails) {
+//        Order order = orderRepository.findById(orderId)
+//                .orElseThrow(() -> new RuntimeException("Order not found with id " + orderId));
+//
+//        order.setUser(orderDetails.getUser());
+//        order.setDate(orderDetails.getDate());
+//        order.setTotalAmount(orderDetails.getTotalAmount());
+//
+//        return orderRepository.save(order);
+//    }
 
     public void deleteOrder(Long orderId) {
         orderRepository.deleteById(orderId);
