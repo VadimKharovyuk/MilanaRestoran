@@ -21,8 +21,6 @@ import java.util.List;
 @RequestMapping("/order")
 @AllArgsConstructor
 public class OrderController {
-
-    private final CartService cartService;
     private final OrderService orderService;
 
 @GetMapping("/orderConfirmation")

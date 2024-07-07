@@ -76,14 +76,17 @@ package com.example.milanarestoran.controller;//package com.example.milanarestor
 //
 //}
 
+import com.example.milanarestoran.config.RabbitMQConfig;
 import com.example.milanarestoran.model.Cart;
 import com.example.milanarestoran.model.Dish;
 import com.example.milanarestoran.model.Order;
+import com.example.milanarestoran.pojo.OrderMessage;
 import com.example.milanarestoran.service.CartService;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
