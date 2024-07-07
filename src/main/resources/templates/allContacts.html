@@ -1,0 +1,109 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>All Contacts</title>-->
+<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">-->
+<!--    <style>-->
+
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="container mt-5">-->
+<!--    <h2>All Contacts</h2>-->
+<!--    <table class="table table-striped">-->
+<!--        <thead>-->
+<!--        <tr>-->
+<!--            <th>ID</th>-->
+<!--            <th>Name</th>-->
+<!--            <th>Email</th>-->
+<!--            <th>Phone</th>-->
+<!--            <th>Position</th>-->
+<!--            <th>Message</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--        <tr th:each="contact : ${contacts}">-->
+<!--            <td th:text="${contact.id}"></td>-->
+<!--            <td th:text="${contact.name}"></td>-->
+<!--            <td th:text="${contact.email}"></td>-->
+<!--            <td th:text="${contact.phone}"></td>-->
+<!--            <td th:text="${contact.position}"></td>-->
+<!--            <td th:text="${contact.message}"></td>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--    </table>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
+
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Contacts</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #222;
+            color: #fff;
+        }
+        .container {
+            max-width: 800px;
+        }
+        .table {
+            background-color: #333;
+            color: #fff;
+        }
+        th, td {
+            border-color: #555;
+        }
+        .btn-delete {
+            color: #fff;
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+        .btn-delete:hover {
+            color: #fff;
+            background-color: #bd2130;
+            border-color: #bd2130;
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <h2>All Contacts</h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Position</th>
+            <th>Message</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="contact : ${contacts}">
+            <td th:text="${contact.id}"></td>
+            <td th:text="${contact.name}"></td>
+            <td th:text="${contact.email}"></td>
+            <td th:text="${contact.phone}"></td>
+            <td th:text="${contact.position}"></td>
+            <td th:text="${contact.message}"></td>
+            <td>
+                <form th:action="@{/contact/remove/{id}(id=${contact.id})}" method="post">
+                    <button type="submit" class="btn btn-sm btn-delete">Delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

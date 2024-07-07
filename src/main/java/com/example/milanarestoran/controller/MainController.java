@@ -20,10 +20,6 @@ public class MainController {
         return "HomePage";
     }
 
-    @GetMapping("/contact")
-    public String contactPage(){
-        return "contact";
-    }
 
 
 

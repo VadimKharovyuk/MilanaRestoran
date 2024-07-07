@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,89 +5,83 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us - Melina</title>
     <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #666;
-            color: #fff;
-        }
-
         .content {
             padding-top: 100px;
             padding-bottom: 100px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            background: #666;
-            color: #fff;
-
+            background: linear-gradient(to bottom, #1a1a1a, #333);
         }
-        .contact-section {
-            background-color: #333;
-            padding: 20px;
+
+        .contact-section, .form-section {
+            background-color: #2b2b2b;
+            padding: 40px;
             max-width: 800px;
             margin: 20px;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
         }
-        .contact-section h2 {
+
+        .contact-section h2, .form-section h3 {
             margin-top: 0;
             color: #fff;
         }
-        .contact-section p {
+
+        .contact-section p, .form-section p {
             line-height: 1.6;
             color: #ccc;
         }
+
         .map-container {
             width: 100%;
             max-width: 800px;
             height: 400px;
             margin: 20px;
         }
+
         .map-container iframe {
             width: 100%;
             height: 100%;
             border: 0;
             border-radius: 10px;
         }
-        .form-section {
-            background-color: #333;
-            padding: 20px;
-            max-width: 800px;
-            margin: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
+
         .form-section form {
             display: flex;
             flex-direction: column;
         }
+
         .form-section label {
             margin: 10px 0 5px;
             color: #fff;
         }
-        .form-section input, .form-section textarea {
+
+        .form-section input, .form-section textarea, .form-section select {
             padding: 10px;
-            border: 1px solid #ccc;
+            border: none;
             border-radius: 5px;
             font-size: 16px;
-            background-color: #eee;
-            color: #333;
+            background-color: #3b3b3b;
+            color: #f2f2f2;
+            margin-bottom: 10px;
         }
+
         .form-section button {
             padding: 10px;
-            background-color: black;
-            color: white;
+            background-color: #666;
+            color: #fff;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
             margin-top: 20px;
         }
+
         .form-section button:hover {
-            background-color: #333;
+            background-color: #000000;
         }
+
         .header {
             background-color: #222;
             color: #fff;
@@ -101,27 +94,31 @@
             top: 0px;
             z-index: 1;
         }
+
         .header a {
             color: #fff;
             margin-right: 50px;
             text-decoration: none;
         }
+
         .header a:hover {
             text-decoration: none;
         }
+
         .logo {
             padding-left: 50px;
         }
+
         .parallax {
-            height: 600px; /* Высота параллакса */
-            background-image: url('/pic/contack.jpg'); /* Замените 'your-parallax-image.jpg' на путь к вашему изображению */
-            background-attachment: fixed; /* Фиксируем изображение во вьюпорте */
-            background-position: center; /* Центрируем изображение */
-            background-repeat: no-repeat; /* Отключаем повтор изображения */
-            background-size: cover; /* Масштабируем изображение по размеру контейнера */
-            position: relative; /* Устанавливаем позиционирование */
-            z-index: 0; /* Устанавливаем z-index, чтобы параллакс был под контентом */
-            overflow: hidden; /* Скрываем лишнее изображение */
+            height: 600px;
+            background-image: url('/pic/contack.jpg');
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+            z-index: 0;
+            overflow: hidden;
         }
 
         .parallax-inner {
@@ -130,22 +127,21 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(255, 255, 255, 0.1); /* Прозрачный фон для контента */
+            background-color: rgba(0, 0, 0, 0.3);
         }
     </style>
+
 </head>
 <body>
 <div class="header">
     <div class="logo">Melina</div>
-    <a href="/">Главная </a>
+    <a href="/">Главная</a>
     <a href="/categories">Menu</a>
-    <!--        <a href="#order-online">Order Online</a>-->
     <a href="/bookings/new">Забронировать столик</a>
-    <a href="/contact">Связь с нами </a>
+    <a href="/contact/all">Трудоустройство</a>
     <a href="/login">Зарегистрироваться</a>
     <a href="/cart">Корзина</a>
     <a href="/bookings/all-reviews">Отзывы</a>
-    </nav>
 </div>
 <div class="parallax">
     <div class="parallax-inner"></div>
@@ -165,25 +161,42 @@
     </div>
 
     <div class="form-section">
-        <h3>Join Our Team</h3>
-        <p>If you're passionate about food and hospitality, we'd love to hear from you. Fill out the form below to inquire about job opportunities at Melina.</p>
-        <form>
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
-
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-
-            <label for="message">Message:</label>
-            <textarea id="message" name="message" rows="4" required></textarea>
-
-            <button type="submit">Submit</button>
+        <h3>Присоединяйтесь</h3>
+        <p>Если вы увлечены едой и гостеприимством, мы будем рады услышать ваше мнение. Заполните форму ниже, чтобы узнать о возможностях трудоустройства в Melina</p>
+        <form th:action="@{/contact/save}" method="post">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone:</label>
+                <input type="tel" class="form-control" id="phone" name="phone" required>
+            </div>
+            <div class="form-group">
+                <label for="position">Position:</label>
+                <select class="form-control" id="position" name="position" required>
+                    <option th:each="position : ${positions}" th:value="${position}" th:text="${position}"></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="message">Message:</label>
+                <textarea class="form-control" id="message" name="message" rows="5" maxlength="900"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Отправить</button>
         </form>
+        <div th:if="${param.successMessage}" class="alert alert-success mt-3" role="alert">
+            <p th:text="${param.successMessage}"></p>
+        </div>
     </div>
 
     <div class="map-container">
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509364!2d144.95373531531882!3d-37.81627977975179!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf5771e2f3c8b4e0d!2sFlinders+St+Station!5e0!3m2!1sen!2sau!4v1551234567890"></iframe>
     </div>
+
 </div>
 </body>
 </html>
