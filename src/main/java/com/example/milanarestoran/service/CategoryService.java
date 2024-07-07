@@ -5,6 +5,7 @@ import com.example.milanarestoran.model.Category;
 import com.example.milanarestoran.repository.CategoryRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,6 +33,11 @@ public class CategoryService {
     }
     @Cacheable(value = "getCategoryById", key = "#id")
     public Category getCategoryById(Long id) {
-       return categoryRepository.findById(id).orElseThrow();
+        try {
+            return categoryRepository.findById(id).orElseThrow();
+        } catch (DataAccessException e) {
+          return categoryRepository.findById(id).orElseThrow();
+        }
+
     }
 }

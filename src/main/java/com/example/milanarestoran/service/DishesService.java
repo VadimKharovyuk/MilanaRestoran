@@ -5,6 +5,7 @@ import com.example.milanarestoran.model.Dish;
 import com.example.milanarestoran.repository.DishRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,7 +22,11 @@ public class DishesService {
     }
     @Cacheable(value = "getDishById", key = "#id")
     public Dish getDishById(Long id) {
-       return dishRepository.findById(id).orElseThrow();
+        try {
+            return dishRepository.findById(id).orElseThrow();
+        } catch (DataAccessException e) {
+            return dishRepository.findById(id).orElseThrow();
+        }
     }
 
     public Dish saveDish(Dish dish) {
