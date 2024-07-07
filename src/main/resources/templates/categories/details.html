@@ -30,8 +30,22 @@
             flex-wrap: wrap;
             justify-content: space-around;
         }
+        /*.dish-card {*/
+        /*    width: calc(20% - 20px);*/
+        /*    background-color: #555;*/
+        /*    border: 1px solid #666;*/
+        /*    border-radius: 5px;*/
+        /*    padding: 20px;*/
+        /*    margin: 10px;*/
+        /*    transition: transform 0.3s, box-shadow 0.3s;*/
+        /*    text-align: left;*/
+        /*    box-sizing: border-box;*/
+        /*    position: relative;*/
+        /*    z-index: 1;*/
+        /*}*/
         .dish-card {
-            width: calc(20% - 20px);
+            /* Ваши текущие стили */
+            width: calc(20% - 20px); /* Ширина карточки, 20% с отступами */
             background-color: #555;
             border: 1px solid #666;
             border-radius: 5px;
@@ -42,7 +56,29 @@
             box-sizing: border-box;
             position: relative;
             z-index: 1;
+            display: flex; /* Сделаем flex-контейнером */
+            flex-direction: column; /* Вертикальное расположение элементов */
         }
+
+        .dish-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .dish-card p {
+            font-size: 0.9rem;
+            color: #ddd;
+            flex-grow: 1; /* Растягиваем параграф на всю оставшуюся высоту */
+        }
+
+        .dish-card a {
+            color: #fff;
+            text-decoration: none;
+            align-self: flex-end; /* Выравниваем кнопку по правому краю */
+            margin-top: 10px; /* Отступ между текстом и кнопкой */
+        }
+
+
         .dish-card:hover {
             transform: scale(1.05);
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
@@ -166,7 +202,7 @@
             <p th:text="${'Цена: $' + dish.price}"></p>
             <a th:href="@{'/dishes/' + ${dish.id}}">Подробнее</a><br> <br>
             <form th:action="@{/cart/add/{dishId}(dishId=${dish.id})}" method="post">
-                <button type="submit" class="btn btn-primary">Add to Cart</button>
+                <button type="submit" class="btn btn-primary">Добавить в корзину</button>
             </form>
         </div>
     </div>

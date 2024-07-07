@@ -18,6 +18,78 @@
             flex-wrap: wrap;
             justify-content: center;
         }
+
+        .card {
+            width: calc(20% - 20px); /* Ширина карточки с отступами */
+            background-color: #555;
+            border: 1px solid #666;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: left;
+            box-sizing: border-box;
+            position: relative;
+            z-index: 1;
+            display: flex; /* Делаем карточку flex-контейнером */
+            flex-direction: column; /* Вертикальное расположение элементов */
+        }
+
+        .card h2 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            font-size: 0.9rem;
+            color: #f1e9e9;
+            flex-grow: 1; /* Растягиваем параграф на всю оставшуюся высоту */
+        }
+
+        .card a.more-details-btn {
+            display: inline-block; /* Для стилизации как кнопка */
+            background-color: #666; /* Цвет фона */
+            color: #fff; /* Цвет текста */
+            padding: 10px 20px; /* Внутренние отступы */
+            border: none; /* Убираем рамку */
+            border-radius: 4px; /* Скругленные углы */
+            text-decoration: none; /* Убираем подчеркивание */
+            cursor: pointer; /* Указатель мыши при наведении */
+            transition: background-color 0.3s; /* Плавный переход цвета */
+            align-self: flex-end; /* Выравниваем кнопку по правому краю */
+            margin-top: auto; /* Отступ от верхнего края */
+        }
+
+        .card a.more-details-btn:hover {
+            background-color: #0056b3; /* Цвет фона при наведении */
+        }
+
+        .card .btn {
+            background-color: #666; /* Цвет фона */
+            color: #fff; /* Цвет текста */
+            padding: 10px 20px; /* Внутренние отступы */
+            border: none; /* Убираем рамку */
+            border-radius: 4px; /* Скругленные углы */
+            cursor: pointer; /* Указатель мыши при наведении */
+            transition: background-color 0.3s; /* Плавный переход цвета */
+            align-self: flex-end; /* Выравниваем кнопку по правому краю */
+            margin-top: auto; /* Отступ от верхнего края */
+        }
+
+        .card .btn:hover {
+            background-color: #4e4ed2; /* Цвет фона при наведении */
+        }
+
+
+
+
+
+
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
         .card {
             width: calc(20% - 20px);
             background-color: #555;
@@ -172,7 +244,7 @@
             <a th:href="@{'/dishes/' + ${dish.id}}" class="more-details-btn">Подробнее</a> <br><br>
 
             <form th:action="@{/cart/add/{dishId}(dishId=${dish.id})}" method="post">
-                <button type="submit" class="btn btn-primary">Add to Cart</button>
+                <button type="submit" class="btn btn-primary">Добавить в  корзину</button>
             </form>
         </div>
     </div>
