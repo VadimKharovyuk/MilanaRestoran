@@ -1,3 +1,105 @@
+##version: '3.8'
+##
+##services:
+##  app:
+##    image: milanarestoran-app
+##    build:
+##      context: .
+##      dockerfile: Dockerfile
+##    ports:
+##      - "4040:4040"
+##    environment:
+##      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/MelinaRestoran
+##    depends_on:
+##      - postgres
+##      - redis
+##    networks:
+##      - milanarestoran-network
+##    restart: always
+##
+##  postgres:
+##    image: postgres:latest
+##    environment:
+##      POSTGRES_DB: MelinaRestoran
+##      POSTGRES_USER: postgres
+##      POSTGRES_PASSWORD: 19111993
+##    volumes:
+##      - postgres-data:/var/lib/postgresql/data
+##    networks:
+##      - milanarestoran-network
+##    restart: always
+##
+##  redis:
+##    image: redis:latest
+##    volumes:
+##      - redis-data:/data
+##    networks:
+##      - milanarestoran-network
+##    restart: always
+##
+##networks:
+##  milanarestoran-network:
+##    driver: bridge
+##
+##volumes:
+##  postgres-data:
+##  redis-data:
+#
+#
+#version: '3.8'
+#
+#services:
+#  app:
+#    image: milanarestoran-app
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    ports:
+#      - "4040:4040"
+#    environment:
+#      - spring.datasource.driver-class-name=org.postgresql.Driver
+#      - spring.datasource.url=jdbc:postgresql://postgres-db:5432/MelinaRestoran
+#      - spring.datasource.username=postgres
+#      - spring.datasource.password=19111993
+#      - spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
+#      - spring.jpa.hibernate.ddl-auto=update
+#      - spring.redis.host=redis
+#      - spring.redis.port=6379
+#      - spring.rabbitmq.host=rabbitmq
+#      - spring.rabbitmq.port=5672
+#      - spring.rabbitmq.username=guest
+#      - spring.rabbitmq.password=guest
+#    depends_on:
+#      - postgres-db
+#      - redis
+#      - rabbitmq
+#
+#  postgres-db:
+#    image: postgres:latest
+#    environment:
+#      - POSTGRES_DB=MelinaRestoran
+#      - POSTGRES_USER=postgres
+#      - POSTGRES_PASSWORD=19111993
+#    volumes:
+#      - postgres-data:/var/lib/postgresql/data
+#
+#  redis:
+#    image: redis:latest
+#    ports:
+#      - "6379:6379"
+#
+#  rabbitmq:
+#    image: rabbitmq:3-management
+#    environment:
+#      - RABBITMQ_DEFAULT_USER=guest
+#      - RABBITMQ_DEFAULT_PASS=guest
+#    ports:
+#      - "5672:5672"
+#      - "15672:15672"
+#
+#volumes:
+#  postgres-data:
+
 version: '3.8'
 
 services:
@@ -9,33 +111,47 @@ services:
     ports:
       - "4040:4040"
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/MelinaRestoran
+      - spring.datasource.driver-class-name=org.postgresql.Driver
+      - spring.datasource.url=jdbc:postgresql://postgres-db:5432/MelinaRestoran
+      - spring.datasource.username=postgres
+      - spring.datasource.password=19111993
+      - spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
+      - spring.jpa.hibernate.ddl-auto=update
+      - spring.redis.host=redis
+      - spring.redis.port=6379
+      - spring.rabbitmq.host=rabbitmq
+      - spring.rabbitmq.port=5672
+      - spring.rabbitmq.username=guest
+      - spring.rabbitmq.password=guest
     depends_on:
-      - postgres
+      - postgres-db
       - redis
-    networks:
-      - milanarestoran-network
-    restart: always
+      - rabbitmq
+    volumes:
+      - ./target:/app/target   # Монтируем директорию target для доступа к собранному JAR файлу
 
-  postgres:
+  postgres-db:
     image: postgres:latest
     environment:
-      POSTGRES_DB: MelinaRestoran
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 19111993
+      - POSTGRES_DB=MelinaRestoran
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=19111993
     volumes:
       - postgres-data:/var/lib/postgresql/data
-    networks:
-      - milanarestoran-network
-    restart: always
 
   redis:
     image: redis:latest
     volumes:
-      - redis-data:/data
-    networks:
-      - milanarestoran-network
-    restart: always
+      - redis-data:/data   # Монтируем volume для данных Redis
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    ports:
+      - "5672:5672"
+      - "15672:15672"
 
 networks:
   milanarestoran-network:
@@ -44,3 +160,4 @@ networks:
 volumes:
   postgres-data:
   redis-data:
+
