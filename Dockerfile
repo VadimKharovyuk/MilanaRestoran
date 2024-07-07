@@ -1,13 +1,15 @@
-FROM openjdk:17-slim
+# Use the official OpenJDK image as a base image
+FROM openjdk:17-jdk-slim
 
-# Устанавливаем рабочую директорию в контейнере
+# Set the working directory inside the container
 WORKDIR /app
 
-# Копируем JAR файл приложения в контейнер
-COPY target/MilanaRestoran-0.0.1-SNAPSHOT.jar app.jar
+# Copy the jar file to the container
+COPY target/MilanaRestoran-0.0.1-SNAPSHOT.jar /app/MilanaRestoran.jar
 
-# Указываем порт, на котором будет работать приложение
+
+# Expose the port that the application will run on
 EXPOSE 4040
 
-# Запускаем приложение при старте контейнера
-CMD ["java", "-jar", "app.jar"]
+# Command to run the application
+ENTRYPOINT ["java", "-jar", "/app/MilanaRestoran.jar"]

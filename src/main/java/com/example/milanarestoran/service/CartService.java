@@ -123,8 +123,6 @@ public class CartService {
         order.setTotalAmount(cart.getTotalAmount());
 
 
-
-
         orderRepository.save(order);
 
         OrderMessage orderMessage = new OrderMessage();

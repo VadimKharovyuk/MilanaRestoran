@@ -14,7 +14,7 @@ public class OrderMessageListener {
 
     @RabbitListener(queues = RabbitMQConfig.QUEUE_NAME)
     public void receiveMessage(OrderMessage orderMessage) {
-        System.out.println("Получен заказ на сумму " + orderMessage.getTotalAmount() + " по адресу доставки " + orderMessage.getDeliveryAddress());
+        System.out.println("Получен заказ для order-queue на сумму " + orderMessage.getTotalAmount() + " по адресу доставки " + orderMessage.getDeliveryAddress());
 
 
     }
