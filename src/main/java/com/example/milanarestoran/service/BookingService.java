@@ -13,16 +13,19 @@ public class BookingService {
     private final BookingRepository bookingRepository;
 
 
-    public Booking save (Booking booking){
-       return bookingRepository.save(booking);
+    public Booking save(Booking booking) {
+        return bookingRepository.save(booking);
     }
-    public Booking findById(Long id){
+
+    public Booking findById(Long id) {
         return bookingRepository.findById(id).orElseThrow();
     }
-    public List<Booking> findAllBooking(){
-       return bookingRepository.findAll();
+
+    public List<Booking> findAllBooking() {
+        return bookingRepository.findAll();
     }
-    public void deleteById(Long id){
+
+    public void deleteById(Long id) {
         bookingRepository.deleteById(id);
     }
 }

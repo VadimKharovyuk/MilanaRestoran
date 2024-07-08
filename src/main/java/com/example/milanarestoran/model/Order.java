@@ -46,21 +46,20 @@ import java.util.List;
 @Setter
 @Table(name = "client_order")
 public class Order {
- @Id
- @GeneratedValue(strategy = GenerationType.IDENTITY)
- private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
- @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
- private List<OrderItem> orderItems = new ArrayList<>();
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<OrderItem> orderItems = new ArrayList<>();
 
- private BigDecimal totalAmount;
+    private BigDecimal totalAmount;
 
- private String deliveryAddress;
+    private String deliveryAddress;
 
- private LocalDateTime orderDate;
+    private LocalDateTime orderDate;
 
- private String email;
-
+    private String email;
 
 
 }

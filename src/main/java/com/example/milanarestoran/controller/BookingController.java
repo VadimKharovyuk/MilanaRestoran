@@ -77,8 +77,8 @@ public class BookingController {
     }
 
     @GetMapping("/all-reviews")
-    public String reviewsList(Model model){
-        model.addAttribute("reviews",reviewService.getAll());
+    public String reviewsList(Model model) {
+        model.addAttribute("reviews", reviewService.getAll());
         return "listreviews";
 
     }

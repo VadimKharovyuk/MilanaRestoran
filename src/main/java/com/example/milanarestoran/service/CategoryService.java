@@ -17,26 +17,26 @@ public class CategoryService {
     private final CategoryRepository categoryRepository;
 
 
-    public Category  saveCategory(Category category){
-       return categoryRepository.save(category);
+    public Category saveCategory(Category category) {
+        return categoryRepository.save(category);
     }
 
 
-
-    public void deleteById(Long id){
+    public void deleteById(Long id) {
         categoryRepository.deleteById(id);
     }
 
     public List<Category> getAllCategories() {
-       return categoryRepository.findAll();
+        return categoryRepository.findAll();
 
     }
+
     @Cacheable(value = "getCategoryById", key = "#id")
     public Category getCategoryById(Long id) {
         try {
             return categoryRepository.findById(id).orElseThrow();
         } catch (DataAccessException e) {
-          return categoryRepository.findById(id).orElseThrow();
+            return categoryRepository.findById(id).orElseThrow();
         }
 
     }

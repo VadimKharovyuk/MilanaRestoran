@@ -13,12 +13,12 @@ import java.util.List;
 public class ReviewService {
     private final ReviewRepository reviewRepository;
 
-    public Review save (Review review){
-       return reviewRepository.save(review);
+    public Review save(Review review) {
+        return reviewRepository.save(review);
 
     }
 
-   public List<Review> getAll(){
+    public List<Review> getAll() {
         return reviewRepository.findAll();
-   }
+    }
 }

@@ -36,11 +36,10 @@ public class DishController {
     }
 
     @PostMapping
-    public String  createDish(@RequestBody Dish dish) {
+    public String createDish(@RequestBody Dish dish) {
         dishService.saveDish(dish);
         return "redirect:/dishes";
     }
-
 
 
     @PostMapping("/{id}")

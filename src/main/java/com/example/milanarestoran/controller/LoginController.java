@@ -18,11 +18,12 @@ public class LoginController {
 
 
     @GetMapping("/login")
-    public String loginPage(Model model){
-        model.addAttribute("user",new User());
+    public String loginPage(Model model) {
+        model.addAttribute("user", new User());
         return "login";
 
     }
+
     @PostMapping("/register")
     public String register(@ModelAttribute("user") User user, RedirectAttributes redirectAttributes) {
 

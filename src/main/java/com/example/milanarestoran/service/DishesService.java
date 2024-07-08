@@ -20,14 +20,37 @@ public class DishesService {
        return dishRepository.findAll();
 
     }
-    @Cacheable(value = "getDishById", key = "#id")
-    public Dish getDishById(Long id) {
-        try {
-            return dishRepository.findById(id).orElseThrow();
-        } catch (DataAccessException e) {
-            return dishRepository.findById(id).orElseThrow();
-        }
+//    @Cacheable(value = "getDishById", key = "#id")
+//    public Dish getDishById(Long id) {
+//        try {
+//            return dishRepository.findById(id).orElseThrow();
+//        } catch (DataAccessException e) {
+//            return dishRepository.findById(id).orElseThrow();
+//        }
+//    }
+@Cacheable(value = "getDishById", key = "#id")
+public Dish getDishById(Long id) {
+    try {
+        return fetchDishFromCacheOrDatabase(id);
+    } catch (DataAccessException e) {
+        // Логируем ошибку доступа к базе данных или кэшу
+        e.printStackTrace();
+        // В случае ошибки, повторно пытаемся получить данные из базы данных
+        return dishRepository.findById(id).orElseThrow(() -> new RuntimeException("Dish not found with id: " + id));
     }
+}
+
+    private Dish fetchDishFromCacheOrDatabase(Long id) {
+        Dish dish = dishRepository.findById(id).orElseThrow(() -> new RuntimeException("Dish not found with id: " + id));
+        // Проверяем, если dish равен null, что может указывать на отсутствие данных в кэше
+        if (dish == null) {
+            throw new RuntimeException("Dish not found with id: " + id);
+        }
+        return dish;
+    }
+
+
+
 
     public Dish saveDish(Dish dish) {
        return dishRepository.save(dish);

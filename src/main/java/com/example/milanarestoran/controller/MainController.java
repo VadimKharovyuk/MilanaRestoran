@@ -13,14 +13,11 @@ public class MainController {
     private final CategoryService categoryService;
 
 
-
     @GetMapping("/")
     public String homePage(Model model) {
         model.addAttribute("categories", categoryService.getAllCategories());
         return "HomePage";
     }
-
-
 
 
 }

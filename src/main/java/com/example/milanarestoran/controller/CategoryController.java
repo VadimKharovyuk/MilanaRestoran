@@ -37,13 +37,13 @@ public class CategoryController {
         List<Dish> dishes = dishesService.getDishesByCategoryId(id);
         model.addAttribute("dishes", dishes);
 
-        return "categories/details"; // Имя шаблона Thymeleaf для отображения деталей категории
+        return "categories/details";
     }
 
     @PostMapping
     public String createCategory(@ModelAttribute Category category) {
         categoryService.saveCategory(category);
-        return "redirect:/categories"; // Перенаправление на страницу списка категорий
+        return "redirect:/categories";
     }
 
 

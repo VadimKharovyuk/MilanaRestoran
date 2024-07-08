@@ -1,4 +1,5 @@
 package com.example.milanarestoran.controller;
+
 import com.example.milanarestoran.model.Contact;
 import com.example.milanarestoran.service.ContactService;
 import lombok.AllArgsConstructor;
@@ -29,7 +30,7 @@ public class ContactController {
                 "ХОСТЕС", "ПОСУДОМОЙЩИК", "КОНДИТЕР", "УБОРЩИК", "ОХРАННИК"
         );
         model.addAttribute("positions", positions);
-        model.addAttribute("contact",new Contact());
+        model.addAttribute("contact", new Contact());
         return "contactForm";
     }
 
@@ -37,7 +38,7 @@ public class ContactController {
     @PostMapping("/save")
     public String saveContact(Contact contact, RedirectAttributes redirectAttributes) {
         contactService.saveContact(contact);
-        redirectAttributes.addFlashAttribute("successMessage","Спасибо за сообщение! Ваш запрос получен, ожидайте нашего ответа.");
+        redirectAttributes.addFlashAttribute("successMessage", "Спасибо за сообщение! Ваш запрос получен, ожидайте нашего ответа.");
         return "redirect:/contact";
     }
 
@@ -47,8 +48,9 @@ public class ContactController {
         model.addAttribute("contacts", contacts);
         return "allContacts";
     }
+
     @PostMapping("/remove/{id}")
-    public String deleteContact(@PathVariable Long id){
+    public String deleteContact(@PathVariable Long id) {
         contactService.deleteContactById(id);
         return "redirect:/contact/all";
     }

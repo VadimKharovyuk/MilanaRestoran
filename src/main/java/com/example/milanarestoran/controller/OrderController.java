@@ -23,19 +23,18 @@ import java.util.List;
 public class OrderController {
     private final OrderService orderService;
 
-@GetMapping("/orderConfirmation")
-public String showOrderConfirmationPage() {
+    @GetMapping("/orderConfirmation")
+    public String showOrderConfirmationPage() {
 
 
-    return "orderConfirmation";
-}
+        return "orderConfirmation";
+    }
 
 
     @GetMapping("/checkout")
     public String showCheckoutForm(Model model, HttpSession session) {
         Cart cart = (Cart) session.getAttribute("cart");
         if (cart == null || cart.getDishes().isEmpty()) {
-            // Redirect to some error page or handle empty cart scenario
             return "redirect:/";
         }
 
@@ -43,18 +42,19 @@ public String showOrderConfirmationPage() {
         model.addAttribute("deliveryAddress", ""); // Initialize with empty delivery address
         return "order/checkout";
     }
+
     @GetMapping("/allOrders")
     public String showAllOrders(Model model) {
         List<Order> orders = orderService.getAllOrders();
         model.addAttribute("orders", orders);
         return "order"; // Ваше представление для отображения всех заказов
     }
+
     @PostMapping("/deleteOrder")
     public String deleteOrder(@RequestParam("id") Long orderId) {
         orderService.deleteOrder(orderId);
         return "redirect:/order/allOrders"; // Перенаправление на страницу всех заказов после удаления
     }
-
 
 
 }

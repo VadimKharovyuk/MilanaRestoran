@@ -8,13 +8,14 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 public class Booking {
-   @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

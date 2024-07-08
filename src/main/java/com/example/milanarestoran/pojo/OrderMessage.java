@@ -6,9 +6,10 @@ import lombok.Setter;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+
 @Getter
 @Setter
-public class OrderMessage  implements Serializable {
+public class OrderMessage implements Serializable {
     private Long id;
     private BigDecimal totalAmount;
     private String deliveryAddress;
