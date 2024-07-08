@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Controller
@@ -49,6 +50,7 @@ public class OrderController {
         model.addAttribute("orders", orders);
         return "order"; // Ваше представление для отображения всех заказов
     }
+
 
     @PostMapping("/deleteOrder")
     public String deleteOrder(@RequestParam("id") Long orderId) {

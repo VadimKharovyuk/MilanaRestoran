@@ -24,7 +24,7 @@ public class OrderService {
         return orderRepository.findById(orderId);
     }
 
-    public Order createOrder(Order order) {
+    public Order save(Order order) {
         return orderRepository.save(order);
     }
 

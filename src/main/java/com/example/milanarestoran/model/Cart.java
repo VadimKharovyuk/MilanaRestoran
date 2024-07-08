@@ -17,9 +17,26 @@ import java.util.Objects;
 @Getter
 @Setter
 public class Cart {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long id;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "client_id")
+//    private User user;
+//
+//    private BigDecimal totalAmount = BigDecimal.ZERO;
+//
+//    @ManyToMany
+//    @JoinTable(
+//            name = "cart_dishes",
+//            joinColumns = @JoinColumn(name = "cart_id"),
+//            inverseJoinColumns = @JoinColumn(name = "dish_id")
+//    )
+//    private List<Dish> dishes = new ArrayList<>();
+@Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+private Long id;
 
     @ManyToOne
     @JoinColumn(name = "client_id")
@@ -34,6 +51,5 @@ public class Cart {
             inverseJoinColumns = @JoinColumn(name = "dish_id")
     )
     private List<Dish> dishes = new ArrayList<>();
-
 
 }

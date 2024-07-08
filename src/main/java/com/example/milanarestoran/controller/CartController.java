@@ -82,6 +82,8 @@ import com.example.milanarestoran.model.Dish;
 import com.example.milanarestoran.model.Order;
 import com.example.milanarestoran.pojo.OrderMessage;
 import com.example.milanarestoran.service.CartService;
+import com.example.milanarestoran.service.EmailService;
+import com.example.milanarestoran.service.OrderService;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
@@ -98,6 +100,8 @@ public class CartController {
     private static final Logger logger = LoggerFactory.getLogger(CartController.class);
     private final CartService cartService;
     private final HttpSession httpSession;
+    private final EmailService emailService;
+
 
     @GetMapping
     public String showCart(Model model) {
@@ -125,18 +129,6 @@ public class CartController {
         return "redirect:/dishes";
     }
 
-    @PostMapping("/remove/{dishId}")
-    public String removeDishFromCart(@PathVariable Long dishId) {
-        Cart cart = (Cart) httpSession.getAttribute("cart");
-        if (cart != null) {
-            Dish dish = cartService.getDishById(dishId);
-            cartService.removeDishFromCart(cart, dish);
-            httpSession.setAttribute("cart", cart);
-            logger.debug("Removed dish: {} from cart", dish);
-        }
-        return "redirect:/cart";
-    }
-
     @PostMapping("/clear")
     public String clearCart() {
         Cart cart = (Cart) httpSession.getAttribute("cart");
@@ -148,20 +140,64 @@ public class CartController {
         return "redirect:/cart";
     }
 
+//    @PostMapping("/checkout")
+//    public String processOrder(HttpSession session, @RequestParam("deliveryAddress") String deliveryAddress, @RequestParam("email") String email) {
+//        Cart cart = (Cart) session.getAttribute("cart");
+//        if (cart == null || cart.getDishes().isEmpty()) {
+//
+//            return "redirect:/";
+//        }
+//
+//        cartService.checkoutCart(cart, deliveryAddress, email);
+//        // Отправка письма с подтверждением заказа
+//        String orderDetails = ""; // Здесь формируйте строку с деталями заказа
+//        emailService.sendOrderConfirmationEmail(email, orderDetails);
+//
+//        session.setAttribute("cart", null); // Clear cart after checkout
+//
+//        // Redirect to the order confirmation page
+//        return "redirect:/order/orderConfirmation";
+//
+//
+//
+//    }
+
     @PostMapping("/checkout")
     public String processOrder(HttpSession session, @RequestParam("deliveryAddress") String deliveryAddress, @RequestParam("email") String email) {
         Cart cart = (Cart) session.getAttribute("cart");
         if (cart == null || cart.getDishes().isEmpty()) {
-
             return "redirect:/";
         }
 
-        cartService.checkoutCart(cart, deliveryAddress, email);
-        session.setAttribute("cart", null); // Clear cart after checkout
+        // Создание и сохранение заказа
+//        Order order = new Order();
+//        order.setDeliveryAddress(deliveryAddress);
+//        orderService.save(order);
 
-        // Redirect to the order confirmation page
+        // Обработка оформления заказа через сервис корзины
+        cartService.checkoutCart(cart, deliveryAddress, email);
+
+        // Формирование сообщения для клиента
+        StringBuilder messageText = new StringBuilder();
+        messageText.append("Спасибо за ваш заказ! Мы рады видеть вас в нашем кафе.\n\n");
+        messageText.append("Ваш заказ:\n");
+
+        cart.getDishes().forEach(dish -> {
+            messageText.append(dish.getName())
+                    .append(" - ")
+                    .append("1 шт. - ")
+                    .append(dish.getPrice())
+                    .append(" руб.\n");
+        });
+
+        messageText.append("\nАдрес доставки: ").append(deliveryAddress);
+
+        // Отправка письма с подтверждением заказа
+        emailService.sendOrderMessage(email, messageText.toString());
+
+        session.setAttribute("cart", null); // Очистка корзины после оформления заказа
+
+        // Перенаправление на страницу подтверждения заказа
         return "redirect:/order/orderConfirmation";
     }
-
-
 }
