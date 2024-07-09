@@ -95,9 +95,7 @@
                 <td th:text="${item.name}"></td>
                 <td th:text="${#numbers.formatDecimal(item.price, 0, 2)}"></td>
                 <td>
-<!--                    <form th:action="@{/cart/remove/{dishId}(dishId=${item.id})}" method="post">-->
-<!--                        <button type="submit" class="btn btn-danger btn-sm">Remove</button>-->
-<!--                    </form>-->
+
                 </td>
             </tr>
             </tbody>
@@ -108,9 +106,6 @@
             </tr>
             </tfoot>
         </table>
-<!--        <form action="/order/checkout" method="get">-->
-<!--            <button type="submit" class="btn btn-success">Оформить Доставку </button>-->
-<!--        </form> <br>-->
         <a href="order/checkout"class="btn btn-success">Оформить Доставку</a><br> <br>
         <form action="/cart/clear" method="post">
             <button type="submit" class="btn btn-danger btn-sm">Очистить корзину</button>

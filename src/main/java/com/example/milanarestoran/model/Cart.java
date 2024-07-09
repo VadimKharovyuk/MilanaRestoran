@@ -7,9 +7,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 @AllArgsConstructor
@@ -17,23 +17,6 @@ import java.util.Objects;
 @Getter
 @Setter
 public class Cart {
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private Long id;
-//
-//    @ManyToOne
-//    @JoinColumn(name = "client_id")
-//    private User user;
-//
-//    private BigDecimal totalAmount = BigDecimal.ZERO;
-//
-//    @ManyToMany
-//    @JoinTable(
-//            name = "cart_dishes",
-//            joinColumns = @JoinColumn(name = "cart_id"),
-//            inverseJoinColumns = @JoinColumn(name = "dish_id")
-//    )
-//    private List<Dish> dishes = new ArrayList<>();
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 private Long id;

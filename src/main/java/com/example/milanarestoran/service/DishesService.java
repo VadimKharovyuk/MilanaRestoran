@@ -1,6 +1,5 @@
 package com.example.milanarestoran.service;
 
-import com.example.milanarestoran.model.Category;
 import com.example.milanarestoran.model.Dish;
 import com.example.milanarestoran.repository.DishRepository;
 import lombok.AllArgsConstructor;
@@ -17,28 +16,21 @@ public class DishesService {
 
 
     public List<Dish> getAllDishes() {
-       return dishRepository.findAll();
+        return dishRepository.findAll();
 
     }
-//    @Cacheable(value = "getDishById", key = "#id")
-//    public Dish getDishById(Long id) {
-//        try {
-//            return dishRepository.findById(id).orElseThrow();
-//        } catch (DataAccessException e) {
-//            return dishRepository.findById(id).orElseThrow();
-//        }
-//    }
-@Cacheable(value = "getDishById", key = "#id")
-public Dish getDishById(Long id) {
-    try {
-        return fetchDishFromCacheOrDatabase(id);
-    } catch (DataAccessException e) {
-        // Логируем ошибку доступа к базе данных или кэшу
-        e.printStackTrace();
-        // В случае ошибки, повторно пытаемся получить данные из базы данных
-        return dishRepository.findById(id).orElseThrow(() -> new RuntimeException("Dish not found with id: " + id));
+
+    @Cacheable(value = "getDishById", key = "#id")
+    public Dish getDishById(Long id) {
+        try {
+            return fetchDishFromCacheOrDatabase(id);
+        } catch (DataAccessException e) {
+            // Логируем ошибку доступа к базе данных или кэшу
+            e.printStackTrace();
+            // В случае ошибки, повторно пытаемся получить данные из базы данных
+            return dishRepository.findById(id).orElseThrow(() -> new RuntimeException("Dish not found with id: " + id));
+        }
     }
-}
 
     private Dish fetchDishFromCacheOrDatabase(Long id) {
         Dish dish = dishRepository.findById(id).orElseThrow(() -> new RuntimeException("Dish not found with id: " + id));
@@ -50,10 +42,8 @@ public Dish getDishById(Long id) {
     }
 
 
-
-
     public Dish saveDish(Dish dish) {
-       return dishRepository.save(dish);
+        return dishRepository.save(dish);
     }
 
     public void deleteDish(Long id) {
@@ -63,4 +53,6 @@ public Dish getDishById(Long id) {
     public List<Dish> getDishesByCategoryId(Long id) {
         return dishRepository.findByCategoryId(id);
     }
+
+
 }

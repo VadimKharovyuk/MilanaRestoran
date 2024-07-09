@@ -1,5 +1,4 @@
 package com.example.milanarestoran.model;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -15,20 +14,6 @@ import java.io.Serializable;
 @Getter
 @Setter
 public class Dish implements Serializable {
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private Long id;
-//    private String name;
-//
-//    @Column(length = 600)
-//    private String description;
-//    private Double price;
-//
-//
-//    @JsonIgnore
-//    @ManyToOne
-//    @JoinColumn(name = "category_id")
-//    private Category category;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,6 +28,4 @@ public class Dish implements Serializable {
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
-
-
 }
