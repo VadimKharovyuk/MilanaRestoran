@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Discounts List</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <style>
+        /* Общие стили */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url("/pic/discounts_for_cafe_restaurants_0.jpg");
+            background-size: cover;
+            background-attachment: fixed; /* Это обеспечивает эффект parallax */
+            color: #fff;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .card {
+            width: 300px;
+            background-color: rgba(0, 0, 0, 0.7); /* Чтобы текст был читаемым на фоне */
+            color: #fff;
+            border: 1px solid #666;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card-header {
+            background-color: #666;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .card-footer {
+            background-color: #666;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            margin-top: 10px;
+            background-color: #666;
+            color: #fff;
+            text-decoration: none;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2 style="text-align: center">Скидки </h2>
+
+    <div class="card-container">
+        <div th:each="discount : ${discounts}" class="card">
+            <div class="card-header">
+                <h3 th:text="${discount.category.name}"></h3>
+            </div>
+            <div class="card-body">
+                <p>Amount: <span th:text="${discount.amount}"></span></p>
+                <p>Start Date: <span th:text="${discount.startDate}"></span></p>
+                <p>End Date: <span th:text="${discount.endDate}"></span></p>
+            </div>
+            <div class="card-footer">
+                <a th:href="@{'/categories/' + ${discount.category.id}}" class="btn btn-primary">Перейти в категорию</a>
+                <!-- Кнопка "Удалить" -->
+                <form th:action="@{/discounts/delete/{id}(id=${discount.id})}" method="post" style="display: inline;">
+                    <button type="submit" class="btn btn-danger">Удалить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <a href="/discounts/new" class="btn btn-primary">Создать новую скидку</a>
+</div>
+</body>
+</html>

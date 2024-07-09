@@ -1,9 +1,11 @@
 package com.example.milanarestoran.controller;//package com.example.milanarestoran.controller;
+
 import com.example.milanarestoran.config.RabbitMQConfig;
 import com.example.milanarestoran.model.Cart;
 import com.example.milanarestoran.model.Dish;
 import com.example.milanarestoran.model.Order;
 import com.example.milanarestoran.pojo.OrderMessage;
+import com.example.milanarestoran.repository.DishRepository;
 import com.example.milanarestoran.service.CartService;
 import com.example.milanarestoran.service.EmailService;
 import com.example.milanarestoran.service.OrderService;
@@ -24,9 +26,35 @@ public class CartController {
     private final CartService cartService;
     private final HttpSession httpSession;
     private final EmailService emailService;
+    private final DishRepository dishRepository;
 
 
-    @GetMapping
+//    @GetMapping
+//    public String showCart(Model model) {
+//        Cart cart = (Cart) httpSession.getAttribute("cart");
+//        if (cart == null) {
+//            cart = new Cart();
+//            httpSession.setAttribute("cart", cart);
+//        }
+//        model.addAttribute("cart", cart);
+//        return "cart/view";
+//    }
+
+    //    @PostMapping("/add/{dishId}")
+//    public String addDishToCart(@PathVariable Long dishId) {
+//        Cart cart = (Cart) httpSession.getAttribute("cart");
+//        if (cart == null) {
+//            cart = new Cart();
+//            httpSession.setAttribute("cart", cart);
+//        }
+//
+//        Dish dish = cartService.getDishById(dishId);
+//        cartService.addDishToCart(cart, dish);
+//        httpSession.setAttribute("cart", cart);
+//
+//        return "redirect:/dishes";
+//    }
+    @GetMapping()
     public String showCart(Model model) {
         Cart cart = (Cart) httpSession.getAttribute("cart");
         if (cart == null) {
@@ -38,18 +66,17 @@ public class CartController {
     }
 
     @PostMapping("/add/{dishId}")
-    public String addDishToCart(@PathVariable Long dishId) {
+    public String addToCart(@PathVariable("dishId") Long dishId) {
         Cart cart = (Cart) httpSession.getAttribute("cart");
         if (cart == null) {
             cart = new Cart();
             httpSession.setAttribute("cart", cart);
         }
 
-        Dish dish = cartService.getDishById(dishId);
+        Dish dish = dishRepository.findById(dishId).orElseThrow(() -> new RuntimeException("Dish not found"));
         cartService.addDishToCart(cart, dish);
-        httpSession.setAttribute("cart", cart);
 
-        return "redirect:/dishes";
+        return "redirect:/cart";
     }
 
     @PostMapping("/clear")

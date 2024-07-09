@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create Discount</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <style>
+        body {
+            background-color: #222;
+            color: #ddd;
+            font-family: Arial, sans-serif;
+        }
+
+        h2 {
+            color: #666;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #333;
+            border: 1px solid #666;
+            border-radius: 5px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
+        }
+
+        input[type="number"],
+        input[type="date"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #666;
+            background-color: #444;
+            color: #ddd;
+        }
+
+        button[type="submit"] {
+            padding: 10px 20px;
+            background-color: #666;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #555;
+        }
+
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #666;
+            background-color: #444;
+            color: #ddd;
+        }
+
+        option {
+            background-color: #444;
+            color: #ddd;
+        }
+
+
+    </style>
+</head>
+<body>
+<h2 style="text-align: center">Create Discount</h2>
+<form th:action="@{/discounts/new}" method="post">
+    <div>
+        <label for="categoryId">Category:</label>
+        <select id="categoryId" name="categoryId" required>
+            <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+        </select>
+    </div>
+    <div>
+        <label for="amount">Discount Amount:</label>
+        <input type="number" step="0.01" id="amount" name="amount" required>
+    </div>
+    <div>
+        <label for="startDate">Start Date:</label>
+        <input type="date" id="startDate" name="startDate" required>
+    </div>
+    <div>
+        <label for="endDate">End Date:</label>
+        <input type="date" id="endDate" name="endDate" required>
+    </div>
+    <div>
+        <button type="submit">Create Discount</button>
+    </div>
+</form>
+</body>
+</html>

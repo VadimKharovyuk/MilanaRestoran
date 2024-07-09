@@ -1,3 +1,141 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Dish Details</title>-->
+<!--    <style>-->
+<!--        body {-->
+<!--            font-family: Arial, sans-serif;-->
+<!--            margin: 0;-->
+<!--            padding: 20px;-->
+<!--            background-color: #070707;-->
+<!--            color: #fff;-->
+<!--        }-->
+
+<!--        .container {-->
+<!--            max-width: 800px;-->
+<!--            margin: 0 auto;-->
+<!--            background-color: #666;-->
+<!--            border: 1px solid #ddd; /* Обводка */-->
+<!--            border-radius: 5px;-->
+<!--            padding: 20px;-->
+<!--            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);-->
+<!--            position: relative; /* Добавляем позиционирование для корректного отображения параллакса */-->
+<!--            z-index: 1; /* Устанавливаем z-index, чтобы контент был выше параллакса */-->
+<!--        }-->
+
+<!--        .dish-details {-->
+<!--            margin-bottom: 20px;-->
+<!--        }-->
+
+<!--        .dish-details h1 {-->
+<!--            font-size: 2rem; /* Увеличиваем размер заголовка */-->
+<!--            margin-bottom: 10px;-->
+<!--        }-->
+
+<!--        .dish-details p {-->
+<!--            font-size: 1.2rem; /* Увеличиваем размер текста описания */-->
+<!--            color: #d5cbcb;-->
+<!--        }-->
+
+<!--        /* Стили для параллакса */-->
+<!--        .parallax {-->
+<!--            height: 600px; /* Высота параллакса */-->
+<!--            background-image: url('/pic/Default_Lobster_Ravioli_0.jpg'); /* Замените 'your-parallax-image.jpg' на путь к вашему изображению */-->
+<!--            background-attachment: fixed; /* Фиксируем изображение во вьюпорте */-->
+<!--            background-position: center; /* Центрируем изображение */-->
+<!--            background-repeat: no-repeat; /* Отключаем повтор изображения */-->
+<!--            background-size: cover; /* Масштабируем изображение по размеру контейнера */-->
+<!--            position: relative; /* Устанавливаем позиционирование */-->
+<!--            z-index: 0; /* Устанавливаем z-index, чтобы параллакс был под контентом */-->
+<!--            overflow: hidden; /* Скрываем лишнее изображение */-->
+<!--        }-->
+
+<!--        .parallax-inner {-->
+<!--            position: absolute;-->
+<!--            top: 0;-->
+<!--            left: 0;-->
+<!--            width: 100%;-->
+<!--            height: 100%;-->
+<!--            background-color: rgba(255, 255, 255, 0.1); /* Прозрачный фон для контента */-->
+<!--        }-->
+
+<!--        /* Стили для ссылки "Назад к категориям" */-->
+<!--        a {-->
+<!--            display: block;-->
+<!--            margin-top: 20px; /* Добавляем отступ сверху */-->
+<!--            text-decoration: none;-->
+<!--            color: #007bff; /* Цвет ссылки */-->
+<!--        }-->
+
+<!--        a:hover {-->
+<!--            text-decoration: underline; /* Подчеркиваем ссылку при наведении */-->
+<!--        }-->
+<!--        .header {-->
+<!--            background-color: black;-->
+<!--            color: white;-->
+<!--            padding: 30px 0px;-->
+<!--            display: flex;-->
+<!--            justify-content: right;-->
+<!--            align-items: center;-->
+<!--            position: fixed;-->
+<!--            width: 100%;-->
+<!--            top: 0px;-->
+<!--            z-index: 1;-->
+<!--        }-->
+<!--        .header a {-->
+<!--            color: white;-->
+<!--            margin: 0 15px;-->
+<!--            text-decoration: none;-->
+<!--            margin-right: 50px;-->
+<!--        }-->
+<!--        .header a:hover {-->
+<!--            text-decoration: none;-->
+<!--        }-->
+
+
+
+<!--    </style>-->
+
+
+<!--</head>-->
+<!--<body>-->
+<!--<div class="header">-->
+
+<!--    <a href="/">Главная </a>-->
+<!--    <a href="/categories">Menu</a>-->
+<!--    &lt;!&ndash;        <a href="#order-online">Order Online</a>&ndash;&gt;-->
+<!--    <a href="/bookings/new">Забронировать столик</a>-->
+<!--    <a href="/contact">Связь с нами </a>-->
+<!--    <a href="/login">Зарегистрироваться</a>-->
+<!--    <a href="/cart">Корзина</a>-->
+<!--    <a href="/bookings/all-reviews">Отзывы</a>-->
+<!--    </nav>-->
+<!--</div>-->
+<!--<div class="parallax">-->
+<!--    <div class="parallax-inner"></div>-->
+<!--</div>-->
+<!--&lt;!&ndash; dishes/details.html &ndash;&gt;-->
+<!--<div class="container">-->
+<!--    <div class="dish-details">-->
+<!--        <h1 th:text="${dish.name}"></h1>-->
+<!--        <p th:text="${'Описание: ' + dish.description}"></p>-->
+<!--        <p th:text="${'Цена: $' + dish.price}"></p>-->
+<!--        <form th:action="@{/cart/add/{dishId}(dishId=${dish.id})}" method="post">-->
+<!--            <button type="submit" class="btn btn-primary">Добавить в  корзину</button>-->
+<!--        </form>-->
+<!--    </div>-->
+
+<!--    <a href="/categories">Назад к категориям</a>-->
+<!--</div>-->
+<!--&lt;!&ndash; Параллакс &ndash;&gt;-->
+
+
+<!--</body>-->
+<!--</html>-->
+
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -72,6 +210,7 @@
         a:hover {
             text-decoration: underline; /* Подчеркиваем ссылку при наведении */
         }
+
         .header {
             background-color: black;
             color: white;
@@ -84,50 +223,63 @@
             top: 0px;
             z-index: 1;
         }
+
         .header a {
             color: white;
             margin: 0 15px;
             text-decoration: none;
             margin-right: 50px;
         }
+
         .header a:hover {
             text-decoration: none;
         }
 
+        /* Стили для кнопки "Добавить в корзину" */
+        .btn-primary {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #666;
+            color: #fff;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
 
-
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
     </style>
-
-
 </head>
 <body>
 <div class="header">
-
-    <a href="/">Главная </a>
-    <a href="/categories">Menu</a>
-    <!--        <a href="#order-online">Order Online</a>-->
+    <a href="/">Главная</a>
+    <a href="/categories">Меню</a>
     <a href="/bookings/new">Забронировать столик</a>
-    <a href="/contact">Связь с нами </a>
+    <a href="/contact">Связь с нами</a>
     <a href="/login">Зарегистрироваться</a>
     <a href="/cart">Корзина</a>
     <a href="/bookings/all-reviews">Отзывы</a>
-    </nav>
 </div>
+
 <div class="parallax">
     <div class="parallax-inner"></div>
 </div>
+
 <!-- dishes/details.html -->
 <div class="container">
     <div class="dish-details">
         <h1 th:text="${dish.name}"></h1>
         <p th:text="${'Описание: ' + dish.description}"></p>
         <p th:text="${'Цена: $' + dish.price}"></p>
+        <form th:action="@{/cart/add/{dishId}(dishId=${dish.id})}" method="post">
+            <button type="submit" class="btn-primary">Добавить в корзину</button>
+        </form>
     </div>
-
     <a href="/categories">Назад к категориям</a>
 </div>
 <!-- Параллакс -->
-
-
 </body>
 </html>
