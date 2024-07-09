@@ -2,8 +2,6 @@ package com.example.milanarestoran.controller;
 
 import com.example.milanarestoran.model.Cart;
 import com.example.milanarestoran.model.Order;
-import com.example.milanarestoran.repository.OrderRepository;
-import com.example.milanarestoran.service.CartService;
 import com.example.milanarestoran.service.OrderService;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
-import java.util.Optional;
 
 
 @Controller
@@ -26,9 +23,7 @@ public class OrderController {
 
     @GetMapping("/orderConfirmation")
     public String showOrderConfirmationPage() {
-
-
-        return "orderConfirmation";
+        return "order/orderConfirmation";
     }
 
 
@@ -48,14 +43,14 @@ public class OrderController {
     public String showAllOrders(Model model) {
         List<Order> orders = orderService.getAllOrders();
         model.addAttribute("orders", orders);
-        return "order"; // Ваше представление для отображения всех заказов
+        return "order";
     }
 
 
     @PostMapping("/deleteOrder")
     public String deleteOrder(@RequestParam("id") Long orderId) {
         orderService.deleteOrder(orderId);
-        return "redirect:/order/allOrders"; // Перенаправление на страницу всех заказов после удаления
+        return "redirect:/order/allOrders";
     }
 
 

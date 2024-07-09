@@ -75,9 +75,46 @@
         .btn:hover {
             background-color: #555;
         }
+        .header {
+            background-color: black;
+            color: white;
+            padding: 30px 0px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0px;
+            z-index: 1;
+
+        }
+        .header a {
+            color: white;
+            text-decoration: none;
+            margin-right: 50px;
+
+
+        }
+        .header a:hover {
+            text-decoration: none;
+        }
+        .logo {
+            padding-left: 50px;
+        }
     </style>
 </head>
 <body>
+<div class="header">
+    <div class="logo">Melina</div>
+    <a href="/">Главная </a>
+    <a href="/categories">Menu</a>
+    <a href="/bookings/new">Забронировать столик</a>
+    <a href="/contact">Связь с нами </a>
+    <a href="/login">Зарегистрироваться</a>
+    <a href="/cart">Корзина</a>
+    </nav>
+</div>
+<br><br><br>
 <div class="container">
     <h2 style="text-align: center">Скидки </h2>
 

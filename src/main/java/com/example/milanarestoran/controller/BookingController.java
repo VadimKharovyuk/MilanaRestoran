@@ -28,7 +28,7 @@ public class BookingController {
     public String getAllBookings(Model model) {
         List<Booking> bookings = bookingService.findAllBooking();
         model.addAttribute("bookings", bookings);
-        return "booking-list";
+        return "bookings/booking-list";
     }
 
     @GetMapping("/{id}")
@@ -45,7 +45,7 @@ public class BookingController {
         model.addAttribute("users", users);
         model.addAttribute("booking", new Booking());
         model.addAttribute("review", new Review());
-        return "booking-form";
+        return "bookings/booking-form";
     }
 
     @PostMapping
@@ -59,7 +59,7 @@ public class BookingController {
         }
 
         bookingService.save(booking);
-        return "booking-confirmation";
+        return "bookings/booking-confirmation";
     }
 
     @PostMapping("/delete/{id}")
@@ -79,7 +79,7 @@ public class BookingController {
     @GetMapping("/all-reviews")
     public String reviewsList(Model model) {
         model.addAttribute("reviews", reviewService.getAll());
-        return "listreviews";
+        return "bookings/listreviews";
 
     }
 

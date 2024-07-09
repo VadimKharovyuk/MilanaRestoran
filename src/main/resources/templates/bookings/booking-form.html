@@ -194,7 +194,7 @@
 <body>
 <div class="header">
     <div class="logo">Melina</div>
-    <a href="/">Главная </a>
+    <a href="/static">Главная </a>
     <a href="/categories">Menu</a>
     <!--        <a href="#order-online">Order Online</a>-->
     <a href="/bookings">Cписок записей</a>
@@ -210,7 +210,7 @@
 </div>
 <div class="container">
     <h1>Create Booking</h1>
-    <form th:action="@{/bookings}" th:object="${booking}" method="post">
+    <form th:action="@{/templates/bookings}" th:object="${booking}" method="post">
         <!-- Остальные поля формы для бронирования -->
         <div class="form-group">
             <label for="user">User</label>
