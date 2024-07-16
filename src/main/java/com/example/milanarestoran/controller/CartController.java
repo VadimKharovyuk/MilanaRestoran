@@ -1,22 +1,24 @@
 package com.example.milanarestoran.controller;//package com.example.milanarestoran.controller;
 
-import com.example.milanarestoran.config.RabbitMQConfig;
 import com.example.milanarestoran.model.Cart;
 import com.example.milanarestoran.model.Dish;
 import com.example.milanarestoran.model.Order;
-import com.example.milanarestoran.pojo.OrderMessage;
 import com.example.milanarestoran.repository.DishRepository;
 import com.example.milanarestoran.service.CartService;
 import com.example.milanarestoran.service.EmailService;
-import com.example.milanarestoran.service.OrderService;
+import com.example.milanarestoran.service.PdfService;
+import com.itextpdf.text.DocumentException;
+import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 
 @Controller
 @RequestMapping("/cart")
@@ -27,6 +29,7 @@ public class CartController {
     private final HttpSession httpSession;
     private final EmailService emailService;
     private final DishRepository dishRepository;
+    private final PdfService pdfService;
 
 
 //    @GetMapping
@@ -90,36 +93,59 @@ public class CartController {
         return "redirect:/cart";
     }
 
-    @PostMapping("/checkout")
-    public String processOrder(HttpSession session, @RequestParam("deliveryAddress") String deliveryAddress, @RequestParam("email") String email) {
-        Cart cart = (Cart) session.getAttribute("cart");
-        if (cart == null || cart.getDishes().isEmpty()) {
-            return "redirect:/";
-        }
-        // Обработка оформления заказа через сервис корзины
-        cartService.checkoutCart(cart, deliveryAddress, email);
 
-        // Формирование сообщения для клиента
-        StringBuilder messageText = new StringBuilder();
-        messageText.append("Спасибо за ваш заказ! Мы рады видеть вас в нашем кафе.\n\n");
-        messageText.append("Ваш заказ:\n");
 
-        cart.getDishes().forEach(dish -> {
-            messageText.append(dish.getName())
-                    .append(" - ")
-                    .append("1 шт. - ")
-                    .append(dish.getPrice())
-                    .append(" руб.\n");
-        });
 
-        messageText.append("\nАдрес доставки: ").append(deliveryAddress);
-
-        // Отправка письма с подтверждением заказа
-        emailService.sendOrderMessage(email, messageText.toString());
-
-        session.setAttribute("cart", null); // Очистка корзины после оформления заказа
-
-        // Перенаправление на страницу подтверждения заказа
-        return "redirect:/order/orderConfirmation";
+@PostMapping("/checkout")
+public String processOrder(HttpSession session, @RequestParam("deliveryAddress") String deliveryAddress, @RequestParam("email") String email) {
+    Cart cart = (Cart) session.getAttribute("cart");
+    if (cart == null || cart.getDishes().isEmpty()) {
+        return "redirect:/";
     }
+    // Process the order using the cart service
+    Order order = cartService.checkoutCart(cart, deliveryAddress, email);
+
+    // Generate the PDF
+    ByteArrayInputStream pdfStream;
+    try {
+        pdfStream = pdfService.generateOrderPdf(order);
+    } catch (DocumentException | IOException e) {
+        e.printStackTrace();
+        return "redirect:/order/checkout?error";
+    }
+
+    // Prepare the email message
+    StringBuilder messageText = new StringBuilder();
+    messageText.append("Дорогой клиент,\n\n");
+    messageText.append("Спасибо за ваш заказ! Мы рады приветствовать вас в нашем кафе.\n");
+    messageText.append("Мы ценим ваш выбор и обещаем вкусную и быструю доставку.\n\n");
+    messageText.append("Ваш заказ:\n");
+
+    cart.getDishes().forEach(dish -> {
+        messageText.append(dish.getName())
+                .append(" - ")
+                .append("1 шт. - ")
+                .append(dish.getPrice())
+                .append(" руб.\n");
+    });
+
+    messageText.append("\nАдрес доставки: ").append(deliveryAddress).append("\n\n");
+    messageText.append("С наилучшими пожеланиями,\n");
+    messageText.append("Команда вашего любимого кафе");
+
+    // Send the email with the PDF attachment
+    try {
+        emailService.sendOrderMessage(email, messageText.toString(), pdfStream);
+    } catch (MessagingException e) {
+        e.printStackTrace();
+        return "redirect:/order/checkout?error";
+    }
+
+    session.setAttribute("cart", null); // Clear the cart after order processing
+
+    // Redirect to the order confirmation page
+    return "redirect:/order/orderConfirmation";
+}
+
+
 }

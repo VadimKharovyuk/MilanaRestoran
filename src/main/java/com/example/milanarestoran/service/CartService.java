@@ -81,7 +81,7 @@ public void addDishToCart(Cart cart, Dish dish) {
 
 
     @Transactional
-    public void checkoutCart(Cart cart, String deliveryAddress, String userEmail) {
+    public Order checkoutCart(Cart cart, String deliveryAddress, String userEmail) {
         Order order = new Order();
         order.setDeliveryAddress(deliveryAddress);
         order.setOrderDate(LocalDateTime.now());
@@ -111,6 +111,7 @@ public void addDishToCart(Cart cart, Dish dish) {
 
         logger.debug("Saved order to database: {}", order);
 
+        return order;
     }
 }
 

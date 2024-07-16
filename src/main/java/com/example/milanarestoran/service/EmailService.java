@@ -1,12 +1,19 @@
 package com.example.milanarestoran.service;
 
 import com.example.milanarestoran.model.Cart;
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.InputStreamSource;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+
+import java.io.ByteArrayInputStream;
 
 @Service
 @AllArgsConstructor
@@ -14,37 +21,16 @@ public class EmailService {
 
     private final JavaMailSender emailSender;
 
-    public void sendOrderMessage(String recipientEmail, String messageText) {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(recipientEmail);
-        message.setSubject("Подтверждение заказа в нашем кафе");
-        message.setText(messageText);
+public void sendOrderMessage(String recipientEmail, String messageText, ByteArrayInputStream pdfStream) throws MessagingException {
+    MimeMessage message = emailSender.createMimeMessage();
+    MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
-        emailSender.send(message);
-    }
+    helper.setTo(recipientEmail);
+    helper.setSubject("Подтверждение заказа в нашем кафе");
+    helper.setText(messageText);
 
-//    public void sendOrderConfirmationEmail(String recipientEmail, Cart cart, String deliveryAddress) {
-//        SimpleMailMessage message = new SimpleMailMessage();
-//        message.setTo(recipientEmail);
-//        message.setSubject("Подтверждение заказа в нашем кафе");
-//
-//        // Формирование содержимого письма
-//        StringBuilder emailContent = new StringBuilder();
-//        emailContent.append("Спасибо за ваш заказ! Мы рады видеть вас в нашем кафе.\n\n");
-//        emailContent.append("Ваш заказ:\n");
-//
-//        cart.getDishes().forEach(dish -> {
-//            emailContent.append(dish.getName())
-//                    .append(" - ")
-//                    .append("1 шт. - ")  // Если количество не указано в Dish, можно указать по умолчанию 1
-//                    .append(dish.getPrice())
-//                    .append(" руб.\n");
-//        });
-//
-//        emailContent.append("\nАдрес доставки: ").append(deliveryAddress);
-//
-//        message.setText(emailContent.toString());
-//
-//        emailSender.send(message);
-//    }
+    helper.addAttachment("order.pdf", new ByteArrayResource(pdfStream.readAllBytes()));
+
+    emailSender.send(message);
+}
 }
