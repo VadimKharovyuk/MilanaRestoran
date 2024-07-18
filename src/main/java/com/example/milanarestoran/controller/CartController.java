@@ -97,13 +97,13 @@ public class CartController {
 
 
 @PostMapping("/checkout")
-public String processOrder(HttpSession session, @RequestParam("deliveryAddress") String deliveryAddress, @RequestParam("email") String email) {
+public String processOrder(HttpSession session, @RequestParam("deliveryAddress") String deliveryAddress, @RequestParam("email") String email , @RequestParam String  phoneNumber) {
     Cart cart = (Cart) session.getAttribute("cart");
     if (cart == null || cart.getDishes().isEmpty()) {
         return "redirect:/";
     }
     // Process the order using the cart service
-    Order order = cartService.checkoutCart(cart, deliveryAddress, email);
+    Order order = cartService.checkoutCart(cart, deliveryAddress, email,phoneNumber);
 
     // Generate the PDF
     ByteArrayInputStream pdfStream;

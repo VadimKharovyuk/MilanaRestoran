@@ -81,11 +81,12 @@ public void addDishToCart(Cart cart, Dish dish) {
 
 
     @Transactional
-    public Order checkoutCart(Cart cart, String deliveryAddress, String userEmail) {
+    public Order checkoutCart(Cart cart, String deliveryAddress, String userEmail ,String phoneNumber) {
         Order order = new Order();
         order.setDeliveryAddress(deliveryAddress);
         order.setOrderDate(LocalDateTime.now());
         order.setEmail(userEmail);
+        order.setPhoneNumber(phoneNumber);
 
         List<OrderItem> orderItems = new ArrayList<>();
         for (Dish dish : cart.getDishes()) {

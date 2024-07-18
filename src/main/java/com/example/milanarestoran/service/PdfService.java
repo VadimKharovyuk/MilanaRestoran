@@ -91,6 +91,7 @@ public class PdfService {
         document.add(new Paragraph("Delivery Address: " + order.getDeliveryAddress()));
         document.add(new Paragraph("Order Date: " + order.getOrderDate()));
         document.add(new Paragraph("Email: " + order.getEmail()));
+        document.add(new Paragraph("Phone Number: " + order.getPhoneNumber()));
 
         PdfPTable table = new PdfPTable(3);
         table.setWidthPercentage(100);
