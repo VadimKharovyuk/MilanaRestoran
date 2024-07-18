@@ -1,4 +1,156 @@
 
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Categories</title>-->
+<!--    <style>-->
+<!--        body {-->
+<!--            font-family: Arial, sans-serif;-->
+<!--            margin: 0;-->
+<!--            padding: 0;-->
+<!--            background-color: #000;-->
+<!--            color: #fff;-->
+<!--        }-->
+<!--        .container {-->
+<!--            width: 80%;-->
+<!--            margin: 0 auto;-->
+<!--            padding: 20px 0;-->
+<!--            text-align: center;-->
+<!--            margin-top: 110px;-->
+<!--        }-->
+<!--        .card-container {-->
+<!--            display: flex;-->
+<!--            flex-wrap: wrap;-->
+<!--            justify-content: center;-->
+<!--        }-->
+<!--        .card {-->
+<!--            background-color: #222;-->
+<!--            border: 1px solid #333;-->
+<!--            border-radius: 5px;-->
+<!--            padding: 20px;-->
+<!--            margin: 10px;-->
+<!--            width: 200px;-->
+<!--            height: 250px;-->
+<!--            display: flex;-->
+<!--            flex-direction: column;-->
+<!--            justify-content: space-between;-->
+<!--            transition: transform 0.3s, box-shadow 0.3s;-->
+<!--            text-align: left;-->
+<!--        }-->
+<!--        .card:hover {-->
+<!--            transform: scale(1.05);-->
+<!--            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);-->
+<!--        }-->
+<!--        .card:before {-->
+<!--            content: "";-->
+<!--            position: absolute;-->
+<!--            top: -5px;-->
+<!--            left: -5px;-->
+<!--            right: -5px;-->
+<!--            bottom: -5px;-->
+<!--            border-radius: 10px;-->
+<!--            background: linear-gradient(45deg, #f3ef09, rgb(26, 160, 208), #15f591);-->
+<!--            background-size: 400% 400%;-->
+<!--            opacity: 0;-->
+<!--            transition: opacity 0.3s, background-size 0.3s;-->
+<!--            z-index: -1;-->
+<!--        }-->
+<!--        .card:hover:before {-->
+<!--            opacity: 1;-->
+<!--            background-size: 200% 200%;-->
+<!--        }-->
+<!--        .card h2 {-->
+<!--            font-size: 1.2rem;-->
+<!--            margin-bottom: 10px;-->
+<!--        }-->
+<!--        .card p {-->
+<!--            font-size: 0.9rem;-->
+<!--            color: #ccc;-->
+<!--        }-->
+<!--        .card a {-->
+<!--            text-decoration: none;-->
+<!--            color: #fff;-->
+<!--        }-->
+<!--        .header {-->
+<!--            background-color: black;-->
+<!--            color: white;-->
+<!--            padding: 30px 0px;-->
+<!--            display: flex;-->
+<!--            justify-content: space-between;-->
+<!--            align-items: center;-->
+<!--            position: fixed;-->
+<!--            width: 100%;-->
+<!--            top: 0px;-->
+<!--            z-index: 1;-->
+<!--        }-->
+<!--        .header a {-->
+<!--            color: white;-->
+<!--            margin: 0 15px;-->
+<!--            text-decoration: none;-->
+<!--        }-->
+<!--        .header a:hover {-->
+<!--            text-decoration: none;-->
+<!--        }-->
+<!--        .logo {-->
+<!--            padding-left: 50px;-->
+<!--        }-->
+<!--        .parallax {-->
+<!--            height: 600px;-->
+<!--            background-image: url('/pic/Default_Juicy_grilled_steak_served_with_mashed_potatoes_and_1.jpg');-->
+<!--            background-attachment: fixed;-->
+<!--            background-position: center;-->
+<!--            background-repeat: no-repeat;-->
+<!--            background-size: cover;-->
+<!--            position: relative;-->
+<!--            z-index: 0;-->
+<!--            overflow: hidden;-->
+<!--        }-->
+<!--        .parallax-inner {-->
+<!--            position: absolute;-->
+<!--            top: 0;-->
+<!--            left: 0;-->
+<!--            width: 100%;-->
+<!--            height: 100%;-->
+<!--            background-color: rgba(255, 255, 255, 0.1);-->
+
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="header">-->
+<!--    <div class="logo">Melina</div>-->
+<!--    <nav>-->
+<!--        <a href="/">Главная </a>-->
+<!--        <a href="/categories">Menu</a>-->
+<!--        &lt;!&ndash;        <a href="#order-online">Order Online</a>&ndash;&gt;-->
+<!--        <a href="/bookings/new">Забронировать столик</a>-->
+<!--        <a href="/contact">Связь с нами </a>-->
+<!--        <a href="/login">Зарегистрироваться</a>-->
+<!--        <a href="/cart">Корзина</a>-->
+<!--        <a href="/bookings/all-reviews">Отзывы</a>-->
+<!--    </nav>-->
+<!--</div>-->
+
+<!--<div class="parallax">-->
+<!--    <div class="parallax-inner"></div>-->
+<!--</div>-->
+
+<!--<div class="container">-->
+<!--    <h1>Menu</h1>-->
+<!--    <div class="card-container">-->
+<!--        <div th:each="category : ${categories}" class="card">-->
+<!--            <a th:href="@{'/categories/' + ${category.id}}">-->
+<!--                <h2 th:text="${category.name}"></h2>-->
+<!--                <p th:text="${category.description}"></p>-->
+<!--            </a>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -114,7 +266,20 @@
             width: 100%;
             height: 100%;
             background-color: rgba(255, 255, 255, 0.1);
-
+        }
+        .create-button {
+            margin: 20px 0;
+            padding: 10px 20px;
+            background-color: #010c01;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .create-button:hover {
+            background-color: #45a085;
         }
     </style>
 </head>
@@ -124,12 +289,12 @@
     <nav>
         <a href="/">Главная </a>
         <a href="/categories">Menu</a>
-        <!--        <a href="#order-online">Order Online</a>-->
         <a href="/bookings/new">Забронировать столик</a>
         <a href="/contact">Связь с нами </a>
         <a href="/login">Зарегистрироваться</a>
         <a href="/cart">Корзина</a>
         <a href="/bookings/all-reviews">Отзывы</a>
+        <a href="/dishes/create" class="create-button">Add New Dish</a>
     </nav>
 </div>
 

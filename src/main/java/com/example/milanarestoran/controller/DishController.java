@@ -2,6 +2,7 @@ package com.example.milanarestoran.controller;
 
 import com.example.milanarestoran.model.Category;
 import com.example.milanarestoran.model.Dish;
+import com.example.milanarestoran.service.CategoryService;
 import com.example.milanarestoran.service.DishesService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import java.util.List;
 public class DishController {
 
     private final DishesService dishService;
+    private final CategoryService categoryService;
 
 
     @GetMapping
@@ -35,10 +37,17 @@ public class DishController {
         return "dishes/details";
     }
 
-    @PostMapping
-    public String createDish(@RequestBody Dish dish) {
+    @PostMapping()
+    public String createDish(@ModelAttribute Dish dish) {
         dishService.saveDish(dish);
         return "redirect:/dishes";
+    }
+
+    @GetMapping("/create")
+    public String create(Model model) {
+        model.addAttribute("dish", new Dish());
+        model.addAttribute("categories", categoryService.getAllCategories()); // Add categories to the model
+        return "dishes/createDish";
     }
 
 
