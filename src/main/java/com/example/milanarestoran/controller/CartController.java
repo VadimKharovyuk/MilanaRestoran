@@ -79,7 +79,7 @@ public class CartController {
         Dish dish = dishRepository.findById(dishId).orElseThrow(() -> new RuntimeException("Dish not found"));
         cartService.addDishToCart(cart, dish);
 
-        return "redirect:/cart";
+        return "redirect:/dishes";
     }
 
     @PostMapping("/clear")
