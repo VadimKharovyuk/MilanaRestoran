@@ -52,4 +52,10 @@ public class CategoryController {
         categoryService.getCategoryById(id);
         return "redirect:/categories";
     }
+    @GetMapping("/create")
+    public String createCategory(Model model){
+        model.addAttribute("category",new Category());
+        model.addAttribute("dish",dishesService.getAllDishes());
+        return "categories/createCategory";
+    }
 }
