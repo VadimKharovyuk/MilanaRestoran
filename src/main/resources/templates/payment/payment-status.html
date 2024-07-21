@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Processing</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #fff;
+        }
+        h1 {
+            color: #28a745;
+        }
+        p {
+            font-size: 18px;
+            color: #333;
+        }
+        .error {
+            color: #dc3545;
+        }
+        .success {
+            color: #28a745;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Payment Processing Status</h1>
+    <p id="statusMessage"></p>
+</div>
+
+<script>
+    // Sample status message, replace with server-side logic
+    const message = "Начата обработка платежа для идентификатора заказа: "; // Replace with dynamic message from server
+    const statusMessage = document.getElementById('statusMessage');
+
+    if (message.includes('error')) {
+        statusMessage.textContent = message;
+        statusMessage.className = 'error';
+    } else {
+        statusMessage.textContent = message;
+        statusMessage.className = 'success';
+    }
+</script>
+</body>
+</html>
