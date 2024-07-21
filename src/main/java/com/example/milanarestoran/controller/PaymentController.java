@@ -1,6 +1,9 @@
 package com.example.milanarestoran.controller;
 
+import com.example.milanarestoran.model.Order;
 import com.example.milanarestoran.model.Payment;
+import com.example.milanarestoran.service.LiqPayService;
+import com.example.milanarestoran.service.OrderService; // Добавьте сервис для работы с заказами
 import com.example.milanarestoran.service.PaymentService;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
@@ -23,18 +26,25 @@ public class PaymentController {
 
     private static final Logger logger = LoggerFactory.getLogger(PaymentController.class);
     private final PaymentService paymentService;
+    private final LiqPayService liqPayService;
+    private final OrderService orderService; // Добавьте сервис для работы с заказами
 
     @GetMapping("/form")
     public String showPaymentForm(Model model) {
-        model.addAttribute("paymentForm",new Payment());
+        model.addAttribute("paymentForm", new Payment());
         return "payment/payment-form";
     }
 
     @PostMapping("/process-payment")
     public String processPayment(@ModelAttribute Payment paymentForm, Model model) {
         try {
+            Order order = orderService.findById(paymentForm.getOrder().getId()); // Получите заказ по ID
+            if (order == null) {
+                throw new IllegalArgumentException("Order not found");
+            }
+
             Payment payment = new Payment();
-            payment.setOrderId(paymentForm.getOrderId());
+            payment.setOrder(order);
             payment.setAmount(paymentForm.getAmount().toString());
             payment.setCurrency(paymentForm.getCurrency());
             payment.setStatus("Pending");
@@ -47,7 +57,16 @@ public class PaymentController {
 
             paymentService.save(payment);
 
-            model.addAttribute("statusMessage", "Payment processing initiated for Order ID: " + paymentForm.getOrderId());
+            // Создание платежа через LiqPay
+            String paymentResponse = liqPayService.createPayment(
+                    paymentForm.getAmount(),
+                    paymentForm.getCurrency(),
+                    paymentForm.getDescription(),
+                    paymentForm.getOrder().getId().toString()
+            );
+
+            // Обработка ответа LiqPay и перенаправление пользователя на страницу оплаты
+            model.addAttribute("paymentResponse", paymentResponse);
             return "payment/payment-status";
         } catch (Exception e) {
             logger.error("An error occurred while processing the payment", e);
@@ -58,7 +77,7 @@ public class PaymentController {
 
     @GetMapping("/payment-status")
     public String getPaymentStatus(@RequestParam("orderId") Long orderId, Model model) {
-        // Logic to fetch payment status
+        // Логика получения статуса платежа
         String message = "Payment processing initiated for Order ID: " + orderId;
         model.addAttribute("statusMessage", message);
         return "payment/payment-status";
@@ -69,8 +88,13 @@ public class PaymentController {
                                       @RequestParam("amount") BigDecimal amount,
                                       @RequestParam("status") String status, Model model) {
         try {
+            Order order = orderService.findById(orderId); // Получите заказ по ID
+            if (order == null) {
+                throw new IllegalArgumentException("Order not found");
+            }
+
             Payment payment = new Payment();
-            payment.setOrderId(orderId);
+            payment.setOrder(order);
             payment.setAmount(amount.toString());
             payment.setStatus(status);
             payment.setCurrency("UAH");

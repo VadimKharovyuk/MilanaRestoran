@@ -23,6 +23,7 @@ public class Order {
     private Long id;
 
 
+
     private BigDecimal totalAmount;
 
     private String deliveryAddress;

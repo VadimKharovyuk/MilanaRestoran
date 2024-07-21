@@ -70,10 +70,8 @@
 <h1>Payment Form</h1>
 
 <form th:action="@{/payment/process-payment}" th:object="${paymentForm}" method="post">
-    <div>
-        <label for="orderId">Order ID:</label>
-        <input type="number" id="orderId" th:field="*{orderId}" required />
-    </div>
+    <!-- Hidden field for orderId -->
+    <input type="hidden" th:field="*{order.id}" />
 
     <div>
         <label for="amount">Amount:</label>
