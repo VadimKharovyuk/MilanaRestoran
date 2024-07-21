@@ -26,18 +26,17 @@ public class OrderController {
         return "order/orderConfirmation";
     }
 
-
-    @GetMapping("/checkout")
-    public String showCheckoutForm(Model model, HttpSession session) {
-        Cart cart = (Cart) session.getAttribute("cart");
-        if (cart == null || cart.getDishes().isEmpty()) {
-            return "redirect:/";
-        }
-
-        model.addAttribute("cart", cart);
-        model.addAttribute("deliveryAddress", ""); // Initialize with empty delivery address
-        return "order/checkout";
+@GetMapping("/checkout")
+public String showCheckoutForm(Model model, HttpSession session) {
+    Cart cart = (Cart) session.getAttribute("cart");
+    if (cart == null || cart.getDishes().isEmpty()) {
+        return "redirect:/";
     }
+
+    model.addAttribute("cart", cart);
+    model.addAttribute("deliveryAddress", ""); // Initialize with empty delivery address
+    return "order/checkout";
+}
 
     @GetMapping("/allOrders")
     public String showAllOrders(Model model) {

@@ -3,10 +3,9 @@ package com.example.milanarestoran.controller;//package com.example.milanarestor
 import com.example.milanarestoran.model.Cart;
 import com.example.milanarestoran.model.Dish;
 import com.example.milanarestoran.model.Order;
+import com.example.milanarestoran.model.Payment;
 import com.example.milanarestoran.repository.DishRepository;
-import com.example.milanarestoran.service.CartService;
-import com.example.milanarestoran.service.EmailService;
-import com.example.milanarestoran.service.PdfService;
+import com.example.milanarestoran.service.*;
 import com.itextpdf.text.DocumentException;
 import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpSession;
@@ -19,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.time.LocalDate;
 
 @Controller
 @RequestMapping("/cart")
@@ -31,32 +31,6 @@ public class CartController {
     private final DishRepository dishRepository;
     private final PdfService pdfService;
 
-
-//    @GetMapping
-//    public String showCart(Model model) {
-//        Cart cart = (Cart) httpSession.getAttribute("cart");
-//        if (cart == null) {
-//            cart = new Cart();
-//            httpSession.setAttribute("cart", cart);
-//        }
-//        model.addAttribute("cart", cart);
-//        return "cart/view";
-//    }
-
-    //    @PostMapping("/add/{dishId}")
-//    public String addDishToCart(@PathVariable Long dishId) {
-//        Cart cart = (Cart) httpSession.getAttribute("cart");
-//        if (cart == null) {
-//            cart = new Cart();
-//            httpSession.setAttribute("cart", cart);
-//        }
-//
-//        Dish dish = cartService.getDishById(dishId);
-//        cartService.addDishToCart(cart, dish);
-//        httpSession.setAttribute("cart", cart);
-//
-//        return "redirect:/dishes";
-//    }
     @GetMapping()
     public String showCart(Model model) {
         Cart cart = (Cart) httpSession.getAttribute("cart");

@@ -23,8 +23,9 @@ public class Payment {
     private Order order;
 
     @ManyToOne
-    @JoinColumn(name = "dish_id", nullable = false)
+    @JoinColumn(name = "dish_id")
     private Dish dish;
+
 
     @Column(nullable = false)
     private String currency;
