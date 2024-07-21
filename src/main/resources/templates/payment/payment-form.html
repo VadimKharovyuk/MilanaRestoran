@@ -1,81 +1,144 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <title>Payment Form</title>-->
+<!--    <link rel="stylesheet" href="/css/style.css">-->
+<!--    <style>-->
+<!--        /* src/main/resources/static/css/style.css */-->
+
+<!--        /* Reset some default styles */-->
+<!--        body, h1, form {-->
+<!--            margin: 0;-->
+<!--            padding: 0;-->
+<!--            box-sizing: border-box;-->
+<!--        }-->
+
+<!--        /* Apply styles to the body */-->
+<!--        body {-->
+<!--            font-family: Arial, sans-serif;-->
+<!--            background-color: #f4f4f4;-->
+<!--            color: #333;-->
+<!--            padding: 20px;-->
+<!--        }-->
+
+<!--        /* Style the form container */-->
+<!--        form {-->
+<!--            background: #fff;-->
+<!--            padding: 20px;-->
+<!--            border-radius: 8px;-->
+<!--            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);-->
+<!--            max-width: 600px;-->
+<!--            margin: 0 auto;-->
+<!--        }-->
+
+<!--        /* Style form labels */-->
+<!--        label {-->
+<!--            display: block;-->
+<!--            margin-bottom: 8px;-->
+<!--            font-weight: bold;-->
+<!--        }-->
+
+<!--        /* Style form inputs and textarea */-->
+<!--        input[type="number"],-->
+<!--        input[type="text"],-->
+<!--        textarea {-->
+<!--            width: 100%;-->
+<!--            padding: 10px;-->
+<!--            margin-bottom: 16px;-->
+<!--            border: 1px solid #ccc;-->
+<!--            border-radius: 4px;-->
+<!--        }-->
+
+<!--        /* Style the submit button */-->
+<!--        button[type="submit"] {-->
+<!--            background-color: #4CAF50;-->
+<!--            color: white;-->
+<!--            border: none;-->
+<!--            padding: 10px 20px;-->
+<!--            border-radius: 4px;-->
+<!--            cursor: pointer;-->
+<!--            font-size: 16px;-->
+<!--        }-->
+
+<!--        button[type="submit"]:hover {-->
+<!--            background-color: #45a049;-->
+<!--        }-->
+
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h1>Payment Form</h1>-->
+
+<!--<form th:action="@{/payment/process-payment}" th:object="${paymentForm}" method="post">-->
+<!--    &lt;!&ndash; Hidden field for orderId &ndash;&gt;-->
+<!--    <input type="hidden" th:field="*{order.id}" />-->
+
+<!--    <div>-->
+<!--        <label for="amount">Amount:</label>-->
+<!--        <input type="number" id="amount" th:field="*{amount}" step="0.01" required />-->
+<!--    </div>-->
+
+<!--    <div>-->
+<!--        <label for="currency">Currency:</label>-->
+<!--        <input type="text" id="currency" th:field="*{currency}" required />-->
+<!--    </div>-->
+
+<!--    <div>-->
+<!--        <label for="description">Description:</label>-->
+<!--        <textarea id="description" th:field="*{description}" required></textarea>-->
+<!--    </div>-->
+
+<!--    <div>-->
+<!--        <label for="cardNumber">Card Number:</label>-->
+<!--        <input type="text" id="cardNumber" th:field="*{cardNumber}" required />-->
+<!--    </div>-->
+
+<!--    <div>-->
+<!--        <label for="cardHolderName">Card Holder Name:</label>-->
+<!--        <input type="text" id="cardHolderName" th:field="*{cardHolderName}" required />-->
+<!--    </div>-->
+
+<!--    <div>-->
+<!--        <label for="expirationDate">Expiration Date (MM/YY):</label>-->
+<!--        <input type="text" id="expirationDate" th:field="*{expirationDate}" required />-->
+<!--    </div>-->
+
+<!--    <div>-->
+<!--        <label for="cvv">CVV:</label>-->
+<!--        <input type="text" id="cvv" th:field="*{cvv}" required />-->
+<!--    </div>-->
+
+<!--    <div>-->
+<!--        <button type="submit">Submit Payment</button>-->
+<!--    </div>-->
+<!--</form>-->
+
+<!--&lt;!&ndash; Optional: Include JavaScript for form validation or other interactions &ndash;&gt;-->
+<!--</body>-->
+<!--</html>-->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Payment Form</title>
     <link rel="stylesheet" href="/css/style.css">
-    <style>
-        /* src/main/resources/static/css/style.css */
-
-        /* Reset some default styles */
-        body, h1, form {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        /* Apply styles to the body */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-            padding: 20px;
-        }
-
-        /* Style the form container */
-        form {
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* Style form labels */
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-        }
-
-        /* Style form inputs and textarea */
-        input[type="number"],
-        input[type="text"],
-        textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 16px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        /* Style the submit button */
-        button[type="submit"] {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        button[type="submit"]:hover {
-            background-color: #45a049;
-        }
-
-    </style>
+    <!-- CSS Styles here -->
 </head>
 <body>
 <h1>Payment Form</h1>
 
 <form th:action="@{/payment/process-payment}" th:object="${paymentForm}" method="post">
-    <!-- Hidden field for orderId -->
-    <input type="hidden" th:field="*{order.id}" />
+    <div>
+        <label for="order">Order:</label>
+        <select id="order" th:field="*{order.id}">
+            <!-- Populate with orders -->
+        </select>
+    </div>
 
     <div>
-        <label for="amount">Amount:</label>
-        <input type="number" id="amount" th:field="*{amount}" step="0.01" required />
+        <label for="dish">Dish:</label>
+        <select id="dish" th:field="*{dish.id}">
+            <!-- Populate with dishes -->
+        </select>
     </div>
 
     <div>

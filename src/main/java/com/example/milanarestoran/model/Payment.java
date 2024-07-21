@@ -22,8 +22,9 @@ public class Payment {
     @JoinColumn(name = "order_id", nullable = false)
     private Order order;
 
-    @Column(nullable = false)
-    private String amount;
+    @ManyToOne
+    @JoinColumn(name = "dish_id", nullable = false)
+    private Dish dish;
 
     @Column(nullable = false)
     private String currency;
@@ -49,4 +50,6 @@ public class Payment {
 
     @Column(nullable = false)
     private String cvv;
+
+
 }
