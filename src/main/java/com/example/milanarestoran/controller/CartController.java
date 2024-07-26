@@ -3,7 +3,6 @@ package com.example.milanarestoran.controller;//package com.example.milanarestor
 import com.example.milanarestoran.model.Cart;
 import com.example.milanarestoran.model.Dish;
 import com.example.milanarestoran.model.Order;
-import com.example.milanarestoran.model.Payment;
 import com.example.milanarestoran.repository.DishRepository;
 import com.example.milanarestoran.service.*;
 import com.itextpdf.text.DocumentException;
@@ -18,13 +17,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.time.LocalDate;
 
 @Controller
 @RequestMapping("/cart")
 @AllArgsConstructor
 public class CartController {
-    private static final Logger logger = LoggerFactory.getLogger(CartController.class);
+
     private final CartService cartService;
     private final HttpSession httpSession;
     private final EmailService emailService;
@@ -41,6 +39,7 @@ public class CartController {
         model.addAttribute("cart", cart);
         return "cart/view";
     }
+
 
     @PostMapping("/add/{dishId}")
     public String addToCart(@PathVariable("dishId") Long dishId) {
@@ -62,7 +61,7 @@ public class CartController {
         if (cart != null) {
             cartService.clearCart(cart);
             httpSession.setAttribute("cart", cart);
-            logger.debug("Cleared the cart");
+
         }
         return "redirect:/cart";
     }

@@ -1,7 +1,6 @@
 package com.example.milanarestoran.service;
 
 import com.example.milanarestoran.model.Dish;
-import com.example.milanarestoran.model.Order;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.apache.http.HttpResponse;
@@ -29,44 +28,50 @@ public class LiqPayService {
     @Value("${liqpay.api_url}")
     private String API_URL;
 
+    public String createPayment(String cartId, BigDecimal totalAmount, String currency, String description) {
+        try {
+            String amount = totalAmount.setScale(2, RoundingMode.HALF_UP).toString();
 
-    public String createPayment(Dish dish, String currency, String description, Order order) {
-        try (CloseableHttpClient client = HttpClients.createDefault()) {
+            // Create JSON data
+            String jsonData = createJsonData(amount, currency, cartId);
+
+            // Generate signature
+            String signature = generateSignature(jsonData, PRIVATE_KEY);
+
+            // Create request body
+            ObjectMapper mapper = new ObjectMapper();
+            ObjectNode node = mapper.createObjectNode();
+            node.put("data", jsonData);
+            node.put("signature", signature);
+            String requestBody = node.toString();
+
+            // Send request
+            CloseableHttpClient httpClient = HttpClients.createDefault();
             HttpPost post = new HttpPost(API_URL);
+            post.setHeader("Content-Type", "application/json");
+            post.setEntity(new StringEntity(requestBody));
 
-            // Преобразуем цену из Double в String и создаем JSON данные
-            String amount = new BigDecimal(dish.getPrice()).setScale(2, RoundingMode.HALF_UP).toString();
-            String data = createJsonData(amount, currency, description, order);
-            String signature = generateSignature(data, PRIVATE_KEY);
+            HttpResponse response = httpClient.execute(post);
+            return response.getEntity().getContent().toString(); // Handle response as needed
 
-            post.setEntity(new StringEntity("data=" + data + "&signature=" + signature));
-            post.setHeader("Content-Type", "application/x-www-form-urlencoded");
-
-            HttpResponse response = client.execute(post);
-            return new ObjectMapper().readTree(response.getEntity().getContent()).toString();
         } catch (Exception e) {
-            // Логирование и обработка ошибок
             e.printStackTrace();
-            return "Error: " + e.getMessage();
+            return "";
         }
     }
 
-
-    private String createJsonData(String amount, String currency, String description, Order order) {
+    private String createJsonData(String amount, String currency, String orderId) {
         ObjectMapper mapper = new ObjectMapper();
         ObjectNode node = mapper.createObjectNode();
         node.put("version", "3");
         node.put("public_key", PUBLIC_KEY);
         node.put("amount", amount);
         node.put("currency", currency);
-        node.put("description", description);
-        node.put("order_id", order.getId().toString()); // Используйте идентификатор заказа из объекта Order
-        node.put("result_url", "http://example.com/success"); // Замените на ваш URL
+        node.put("order_id", orderId);
+        node.put("result_url", "http://example.com/success"); // Replace with your URL
 
         return node.toString();
     }
-
-
 
     private String generateSignature(String data, String privateKey) {
         try {

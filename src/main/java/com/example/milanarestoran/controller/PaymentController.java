@@ -1,48 +1,45 @@
 package com.example.milanarestoran.controller;
 
+import com.example.milanarestoran.model.Cart;
 import com.example.milanarestoran.model.Dish;
-import com.example.milanarestoran.model.Order;
+import com.example.milanarestoran.model.Payment;
 import com.example.milanarestoran.service.DishesService;
 import com.example.milanarestoran.service.LiqPayService;
-import com.example.milanarestoran.service.OrderService;
+import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.view.RedirectView;
 
-@RestController
-@RequestMapping("/payments")
+import java.math.BigDecimal;
+import java.util.List;
+
+@Controller
 @AllArgsConstructor
 public class PaymentController {
-
-    private final LiqPayService liqPayService;
     private final DishesService dishesService;
-    private final OrderService orderService;
 
 
+@GetMapping("/pay")
+    public String pay(Model model ,HttpSession session ){
+// Извлекаем корзину из сессии
+    Cart cart = (Cart) session.getAttribute("cart");
 
-    @PostMapping("/create")
-    public String createPayment(@RequestParam Long dishId, @RequestParam Long orderId,
-                                @RequestParam String currency, @RequestParam String description) {
-        // Замените это на ваш способ получения объекта Dish и Order, например из базы данных
-        Dish dish = getDishById(dishId); // Реализуйте метод для получения объекта Dish по ID
-        Order order = getOrderById(orderId); // Реализуйте метод для получения объекта Order по ID
-
-        if (dish == null || order == null) {
-            return "Error: Dish or Order not found";
-        }
-
-        return liqPayService.createPayment(dish, currency, description, order);
+    // Проверяем, есть ли корзина в сессии
+    if (cart == null || cart.getDishes().isEmpty()) {
+        // Если корзина пуста, перенаправляем на главную страницу
+        return "redirect:/";
     }
 
-    private Dish getDishById(Long dishId) {
-        dishesService.getDishById(dishId);
-        // Реализуйте метод для получения объекта Dish из базы данных
-        // Например, используйте ваш репозиторий для получения данных
-        return null; // Замените на реальную реализацию
-    }
+    // Добавляем корзину и ее товары в модель
+    model.addAttribute("cart", cart);
+    model.addAttribute("deliveryAddress", ""); // Инициализируем пустое поле для адреса доставки
 
-    private Order getOrderById(Long orderId) {
-        orderService.getOrderById(orderId);
-        return null; // Замените на реальную реализацию
-    }
+
+    return "payment/Payment";
+}
 }

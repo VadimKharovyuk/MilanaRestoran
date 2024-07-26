@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,33 +20,10 @@ public class Payment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
-    @ManyToOne
-    @JoinColumn(name = "order_id", nullable = false)
-    private Order order;
-
-    @ManyToOne
-    @JoinColumn(name = "dish_id")
-    private Dish dish;
-
-
-    @Column(nullable = false)
-    private String currency;
-
-    @Column(nullable = false)
-    private String status;
-
-    @Column
-    private String description;
-
-    @Column
-    private String paymentDate;
-
-    // Новые поля для данных карты
     @Column(nullable = false)
     private String cardNumber;
 
-    @Column(nullable = false)
+    @Column(name = "card_holder_name", nullable = false)
     private String cardHolderName;
 
     @Column(nullable = false)
@@ -52,5 +32,6 @@ public class Payment {
     @Column(nullable = false)
     private String cvv;
 
-
+    @Column(name = "total_amount", nullable = false)
+    private BigDecimal totalAmount;
 }

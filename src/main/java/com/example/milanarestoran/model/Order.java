@@ -18,24 +18,36 @@ import java.util.List;
 @Setter
 @Table(name = "client_order")
 public class Order {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-
-
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long id;
+//
+//
+//
+//    private BigDecimal totalAmount;
+//
+//    private String deliveryAddress;
+//
+//    private LocalDateTime orderDate;
+//
+//    private String email;
+//
+//    private String phoneNumber;
+//
+//
+//    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<OrderItem> orderItems = new ArrayList<>();
+@Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+private Long id;
     private BigDecimal totalAmount;
-
     private String deliveryAddress;
-
     private LocalDateTime orderDate;
-
     private String email;
-
     private String phoneNumber;
-
-
+    private Long cardId;
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> orderItems = new ArrayList<>();
+
 
 }

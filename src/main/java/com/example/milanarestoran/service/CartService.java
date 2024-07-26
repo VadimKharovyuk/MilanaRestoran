@@ -4,6 +4,7 @@ package com.example.milanarestoran.service;
 import com.example.milanarestoran.config.RabbitMQConfig;
 import com.example.milanarestoran.model.*;
 import com.example.milanarestoran.pojo.OrderMessage;
+import com.example.milanarestoran.repository.CartRepository;
 import com.example.milanarestoran.repository.DiscountRepository;
 import com.example.milanarestoran.repository.DishRepository;
 import com.example.milanarestoran.repository.OrderRepository;
@@ -30,6 +31,7 @@ public class CartService {
     private final OrderRepository orderRepository;
     private final RabbitTemplate rabbitTemplate;
     private final DiscountRepository discountRepository;
+    private final CartRepository cartRepository;
 
 
     //скидка в % соотношении
@@ -113,6 +115,16 @@ public void addDishToCart(Cart cart, Dish dish) {
         logger.debug("Saved order to database: {}", order);
 
         return order;
+    }
+
+
+    public Cart findById(Long cartId) {
+        return cartRepository.findById(cartId)
+                .orElseThrow(() -> new RuntimeException("Cart not found with id: " + cartId));
+    }
+
+    public Cart save(Cart cart) {
+  return   cartRepository.save(cart);
     }
 }
 
