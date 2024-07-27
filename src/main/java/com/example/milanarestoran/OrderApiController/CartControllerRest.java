@@ -13,14 +13,15 @@ public class CartControllerRest {
     private PaymentService paymentService;
 
     @GetMapping("/pay")
-    public String showPaymentPage() {
+    public String checkout(Model model) {
+        // Передача суммы корзины в форму
+
         return "payment/payment-form";
     }
 
-
     @PostMapping("/checkout-pay")
     @ResponseBody
-    public String processCheckout(@RequestParam String cardNumber, @RequestParam double amount) {
-        return paymentService.makePayment(cardNumber, amount);
+    public String processCheckout(@RequestBody PaymentRequest paymentRequest) {
+        return paymentService.makePayment(paymentRequest);
     }
 }
